@@ -68,7 +68,7 @@ export default [{
     name: 'level_2_1',
     meta: {
       icon: 'md-funnel',
-      title: '二级-1'
+      title: '管理员列表'
     },
     component: () => import('@/view/multilevel/level-2-1.vue')
   },
@@ -77,66 +77,79 @@ export default [{
     name: 'level_2_3',
     meta: {
       icon: 'md-funnel',
-      title: '二级-3'
+      title: '权限列表'
     },
     component: () => import('@/view/multilevel/level-2-3.vue')
-  }
-  ]
-}, {
-  path: '/user',
-  name: '用户管理',
-  meta: {
-    icon: 'md-menu',
-    title: ''
-  },
-  component: Main,
-  children: [{
-    path: 'level_2_1',
-    name: 'level_2_1',
-    meta: {
-      icon: 'md-funnel',
-      title: '二级-1'
-    },
-    component: () => import('@/view/multilevel/level-2-1.vue')
   },
   {
-    path: 'level_2_3',
-    name: 'level_2_3',
+    path: 'level_2_4',
+    name: 'level_2_4',
     meta: {
       icon: 'md-funnel',
-      title: '二级-3'
+      title: '资源列表'
     },
     component: () => import('@/view/multilevel/level-2-3.vue')
   }
   ]
-}, {
-  path: '/article',
-  name: 'multaailevel',
+},
+
+{
+  path: '/c',
+  name: 'c',
   meta: {
     icon: 'md-menu',
     title: '文章管理'
   },
   component: Main,
   children: [{
-    path: 'level_2_1',
-    name: 'level_2_1',
+    path: 'a1',
+    name: 'a1',
     meta: {
       icon: 'md-funnel',
-      title: '二级-1'
+      title: '文章列表'
     },
     component: () => import('@/view/multilevel/level-2-1.vue')
   },
   {
-    path: 'level_2_3',
-    name: 'level_2_3',
+    path: 'a2',
+    name: 'a2',
     meta: {
       icon: 'md-funnel',
-      title: '二级-3'
+      title: '文章分类'
     },
     component: () => import('@/view/multilevel/level-2-3.vue')
   }
   ]
 },
+{
+  path: '/user',
+  name: 'user',
+  meta: {
+    icon: 'md-menu',
+    title: '用户管理'
+  },
+  component: Main,
+  children: [{
+    path: 'userList',
+    name: 'userList',
+    meta: {
+      icon: 'md-funnel',
+      title: '用户列表'
+    },
+    component: () => import('@/view/multilevel/level-2-1.vue')
+  },
+  {
+    path: 'u1',
+    name: 'u1',
+    meta: {
+      icon: 'md-funnel',
+      title: '权限列表'
+    },
+    component: () => import('@/view/multilevel/level-2-3.vue')
+  }
+  ]
+},
+
 {
   path: '/multilevel',
   name: 'multilevel',
