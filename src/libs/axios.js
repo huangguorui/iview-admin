@@ -63,7 +63,7 @@ class HttpRequest {
       try {
         if (res.data.data.pages != null) {
           var value = res.data.data
-          debugger
+          // debugger
           let pageInfo = {
             current: value.current,
             pages: value.pages,
@@ -71,23 +71,27 @@ class HttpRequest {
             total: value.total
           }
 
-          res = Object.assign(res.data.data, pageInfo)
+          // let pageInfo = {
+          //   current: 1,
+          //   pages: 10,
+          //   size: 20,
+          //   total: 50
+          // }
+          res.data.data.pageInfo = pageInfo
+          // res = Object.assign(res.data.data, pageInfo)
+          console.log(res)
         }
         // 改写返回值属性
       } catch (e) {
-        console.log(e)
+        // console.log(e)
       }
 
-      const {
-        data,
-        status
-      } = res
+      // const {
+      //   data
+      // } = res
 
       // 需要进行验证
-      return {
-        data,
-        status
-      }
+      return data
     }, error => {
       this.destroy(url)
       addErrorLog(error.response)
