@@ -37,7 +37,6 @@
 </template>
 <script>
 import { getTableData } from '@/api/data'
-import pageM from '../../components/custom/pageM/pageM'
 export default {
   created () {
     console.log(getTableData().then(res => {
@@ -46,7 +45,6 @@ export default {
     }))
   },
   components: {
-    pageM
   },
   data () {
     return {

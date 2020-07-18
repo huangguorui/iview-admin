@@ -47,77 +47,95 @@ export default [{
   }]
 },
 {
-  path: '',
-  name: 'doc',
+  path: '/home',
+  name: 'home',
   meta: {
-    title: '文档',
-    href: 'https://lison16.github.io/iview-admin-doc/#/',
+    title: '首页',
     icon: 'ios-book'
-  }
+  },
+  component: () => import('@/view/single-page/home')
 },
+  // {
+  //   path: '',
+  //   name: 'doc',
+  //   meta: {
+  //     title: '文档',
+  //     href: 'https://lison16.github.io/iview-admin-doc/#/',
+  //     icon: 'ios-book'
+  //   }
+  // },
 {
-  path: '/roleAndPermission',
-  name: 'roleAndPermission',
+  path: '/adminManage',
+  name: 'adminManage',
   meta: {
     icon: 'md-menu',
-    title: '权限管理'
+    title: '管理员管理'
   },
   component: Main,
   children: [{
-    path: 'level_2_1',
-    name: 'level_2_1',
+    path: 'adminList',
+    name: 'adminList',
     meta: {
       icon: 'md-funnel',
       title: '管理员列表'
     },
-    component: () => import('@/view/multilevel/level-2-1.vue')
+    component: () => import('@/view/adminManage/adminList.vue')
   },
   {
-    path: 'level_2_3',
-    name: 'level_2_3',
+    path: 'roleList',
+    name: 'roleList',
     meta: {
       icon: 'md-funnel',
       title: '权限列表'
     },
-    component: () => import('@/view/multilevel/level-2-3.vue')
+    component: () => import('@/view/adminManage/roleList.vue')
   },
   {
-    path: 'level_2_4',
-    name: 'level_2_4',
+    path: 'permissionList',
+    name: 'permissionList',
     meta: {
       icon: 'md-funnel',
       title: '资源列表'
     },
-    component: () => import('@/view/multilevel/level-2-3.vue')
+    component: () => import('@/view/adminManage/permissionList.vue')
   }
   ]
 },
 
 {
-  path: '/c',
-  name: 'c',
+  path: '/article',
+  name: 'article',
   meta: {
     icon: 'md-menu',
     title: '文章管理'
   },
   component: Main,
   children: [{
-    path: 'a1',
-    name: 'a1',
+    path: 'articleAdd',
+    name: 'articleAdd',
+    meta: {
+      icon: 'md-funnel',
+      title: '文章添加'
+    },
+    component: () => import('@/view/articleManage/articleAdd.vue')
+  },
+  {
+    path: 'articleList',
+    name: 'articleList',
     meta: {
       icon: 'md-funnel',
       title: '文章列表'
     },
-    component: () => import('@/view/multilevel/level-2-1.vue')
+    component: () => import('@/view/articleManage/articleList.vue')
   },
   {
-    path: 'a2',
-    name: 'a2',
+    path: 'articleColumn',
+    name: 'articleColumn',
     meta: {
       icon: 'md-funnel',
       title: '文章分类'
     },
-    component: () => import('@/view/multilevel/level-2-3.vue')
+    component: () => import('@/view/articleManage/articleColumn.vue')
   }
   ]
 },
@@ -136,68 +154,68 @@ export default [{
       icon: 'md-funnel',
       title: '用户列表'
     },
-    component: () => import('@/view/multilevel/level-2-1.vue')
+    component: () => import('@/view/userManage/userList.vue')
   },
   {
-    path: 'u1',
-    name: 'u1',
+    path: 'userC',
+    name: 'userC',
     meta: {
       icon: 'md-funnel',
-      title: '权限列表'
+      title: '用户操作'
     },
-    component: () => import('@/view/multilevel/level-2-3.vue')
+    component: () => import('@/view/userManage/userList.vue')
   }
   ]
 },
 
-{
-  path: '/multilevel',
-  name: 'multilevel',
-  meta: {
-    icon: 'md-menu',
-    title: '多级菜单'
-  },
-  component: Main,
-  children: [{
-    path: 'level_2_1',
-    name: 'level_2_1',
-    meta: {
-      icon: 'md-funnel',
-      title: '二级-1'
-    },
-    component: () => import('@/view/multilevel/level-2-1.vue')
-  },
-  {
-    path: 'level_2_2',
-    name: 'level_2_2',
-    meta: {
-      access: ['super_admin'],
-      icon: 'md-funnel',
-      showAlways: true,
-      title: '二级-2'
-    },
-    component: parentView,
-    children: [{
-      path: 'level_2_2_1',
-      name: 'level_2_2_1',
-      meta: {
-        icon: 'md-funnel',
-        title: '三级'
-      },
-      component: () => import('@/view/multilevel/level-2-2/level-3-1.vue')
-    }]
-  },
-  {
-    path: 'level_2_3',
-    name: 'level_2_3',
-    meta: {
-      icon: 'md-funnel',
-      title: '二级-3'
-    },
-    component: () => import('@/view/multilevel/level-2-3.vue')
-  }
-  ]
-},
+  // {
+  //   path: '/multilevel',
+  //   name: 'multilevel',
+  //   meta: {
+  //     icon: 'md-menu',
+  //     title: '多级菜单'
+  //   },
+  //   component: Main,
+  //   children: [{
+  //     path: 'level_2_1',
+  //     name: 'level_2_1',
+  //     meta: {
+  //       icon: 'md-funnel',
+  //       title: '二级-1'
+  //     },
+  //     component: () => import('@/view/multilevel/level-2-1.vue')
+  //   },
+  //   {
+  //     path: 'level_2_2',
+  //     name: 'level_2_2',
+  //     meta: {
+  //       access: ['super_admin'],
+  //       icon: 'md-funnel',
+  //       showAlways: true,
+  //       title: '二级-2'
+  //     },
+  //     component: parentView,
+  //     children: [{
+  //       path: 'level_2_2_1',
+  //       name: 'level_2_2_1',
+  //       meta: {
+  //         icon: 'md-funnel',
+  //         title: '三级'
+  //       },
+  //       component: () => import('@/view/multilevel/level-2-2/level-3-1.vue')
+  //     }]
+  //   },
+  //   {
+  //     path: 'level_2_3',
+  //     name: 'level_2_3',
+  //     meta: {
+  //       icon: 'md-funnel',
+  //       title: '二级-3'
+  //     },
+  //     component: () => import('@/view/multilevel/level-2-3.vue')
+  //   }
+  //   ]
+  // },
 {
   path: '/401',
   name: 'error_401',

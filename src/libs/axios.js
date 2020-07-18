@@ -2,7 +2,13 @@ import axios from 'axios'
 import store from '@/store'
 // import { Spin } from 'iview'
 const addErrorLog = errorInfo => {
-  const { statusText, status, request: { responseURL } } = errorInfo
+  const {
+    statusText,
+    status,
+    request: {
+      responseURL
+    }
+  } = errorInfo
   let info = {
     type: 'ajax',
     code: status,
@@ -47,8 +53,41 @@ class HttpRequest {
     // 响应拦截
     instance.interceptors.response.use(res => {
       this.destroy(url)
-      const { data, status } = res
-      return { data, status }
+
+      // current
+      // pages
+      // size
+      //  total
+
+      console.log('----------------')
+      try {
+        if (res.data.data.pages != null) {
+          var value = res.data.data
+          debugger
+          let pageInfo = {
+            current: value.current,
+            pages: value.pages,
+            size: value.size,
+            total: value.total
+          }
+
+          res = Object.assign(res.data.data, pageInfo)
+        }
+        // 改写返回值属性
+      } catch (e) {
+        console.log(e)
+      }
+
+      const {
+        data,
+        status
+      } = res
+
+      // 需要进行验证
+      return {
+        data,
+        status
+      }
     }, error => {
       this.destroy(url)
       addErrorLog(error.response)
