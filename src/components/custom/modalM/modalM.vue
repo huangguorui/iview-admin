@@ -1,6 +1,6 @@
 <template>
   <div>
-    isModalClose=={{isModalClose}}
+    <!-- isModalClose=={{isModalClose}} -->
     <Modal :value="isModalClose"
            @on-cancel="cancelModalClose"
            width="360">
@@ -28,7 +28,7 @@
 
 <script>
 export default {
-  name: "modalM",
+  name: 'modalM',
   props: {
     isModalClose: {
       type: Boolean,
@@ -41,21 +41,19 @@ export default {
     isModalLoading: {
       type: Boolean,
       default: false
-    },
+    }
   },
   data () {
     return {
-
 
     }
   },
   methods: {
     cancelModalClose (e) {
-      this.$emit("cancelModalClose", e)
-
+      this.$emit('cancelModalClose', e)
     },
     deleteData () {
-      this.$emit("deleteData")
+      this.$emit('deleteData')
     }
   }
 

@@ -35,13 +35,14 @@ export default {
     // 点击分页
     pageChange (e) {
       this.pageInfo.currentPage = e
-
+      console.log(e)
       this.getList(this.pageInfo)
     },
     // 更换每页显示数量
     pageSizeChange (e) {
       this.pageInfo.size = e
-      console.log('e=' + this.pageInfo.size)
+      // console.log('this.pageInfo=', this.pageInfo)
+      console.log(e)
       this.getList(this.pageInfo)
     }
 

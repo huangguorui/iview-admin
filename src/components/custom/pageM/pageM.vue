@@ -11,13 +11,13 @@
           :total="pageData.total"
           :page-size="pageData.size"
           :show-total="true"
+          :show-sizer="isSize"
           @on-change="pageChange"
+          @on-page-size-change="pageSizeChange"
+          show-elevator
           size="small" />
 
     <!--
- show-sizer
-          @on-page-size-change="pageSizeChange"
- show-elevator
 
            -->
   </div>
@@ -30,7 +30,12 @@ export default {
     pageData: {
       type: Object,
       default: Object
+    },
+    isSize: {
+      type: Boolean,
+      default: false
     }
+
   },
   data () {
     return {
@@ -41,6 +46,7 @@ export default {
       this.$emit('pageChange', e)
     },
     pageSizeChange (e) {
+      console.log('分页')
       this.$emit('pageSizeChange', e)
     }
   }

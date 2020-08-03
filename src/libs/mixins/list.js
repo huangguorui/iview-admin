@@ -88,7 +88,6 @@ export default {
     },
     // 关闭组件侧拉框
     closeDrawer () {
-      console.log('123')
       this.isCloseDrawer = false
     },
     // 添加drawer组件数据
