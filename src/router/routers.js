@@ -190,7 +190,7 @@ export default [{
 },
 
 {
-  path: '/articleInfo',
+  path: '/articleInfo/id/:id',
   name: 'articleInfo',
   meta: {
     title: '文章详情',

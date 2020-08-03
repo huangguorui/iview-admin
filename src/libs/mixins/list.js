@@ -1,5 +1,5 @@
 /**
- * 自定义列表混合带分页带条件查询
+ *
  * @author h
  */
 export default {
@@ -35,7 +35,7 @@ export default {
       this.apiList.getListApi(data).then(res => {
         // 数据处理
         this.pageInfo = res.pageInfo
-        this.list = res.data.records
+        this.list = res.list
         this.isTableLoading = false
       }).catch(err => console.log(err))
     },

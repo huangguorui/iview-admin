@@ -14,7 +14,7 @@
           @on-change="pageChange"
           size="small" />
 
-    <!-- 
+    <!--
  show-sizer
           @on-page-size-change="pageSizeChange"
  show-elevator
@@ -24,9 +24,8 @@
 </template>
 <script>
 
-
 export default {
-  name: "pageM",
+  name: 'pageM',
   props: {
     pageData: {
       type: Object,
@@ -39,15 +38,12 @@ export default {
   },
   methods: {
     pageChange (e) {
-      this.$emit("pageChange", e)
-
+      this.$emit('pageChange', e)
     },
     pageSizeChange (e) {
-      this.$emit("pageSizeChange", e)
-
-    },
+      this.$emit('pageSizeChange', e)
+    }
   }
-
 
 }
 </script>

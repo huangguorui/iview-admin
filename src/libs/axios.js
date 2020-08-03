@@ -28,6 +28,10 @@ class HttpRequest {
       baseURL: this.baseUrl,
       headers: {
         //
+        'Content-Type': 'application/json',
+        'Access-control-Expose-Header': 'Authorization',
+        'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTk2MjkxNTIwLCJleHAiOjE1OTY4OTYzMjB9.NoUaKyXIuBKsEXLWM_NaLHDNP-OophGJfGxXfMAEX3ZRXBg4aupRin-SdEh31OyKP_1aczzx2-fxFNbJJzK7Qw '
+
       }
     }
     return config
@@ -51,51 +55,31 @@ class HttpRequest {
       return Promise.reject(error)
     })
     // 响应拦截
-    instance.interceptors.response.use(res => {
+    instance.interceptors.response.use(response => {
       this.destroy(url)
 
-      // current
-      // pages
-      // size
-      //  total
-
-      console.log('----------------')
-      // try {
-      //   if (res.data.data.pages != null) {
-      //     var value = res.data.data
-      //     // debugger
-      //     let pageInfo = {
-      //       current: value.current,
-      //       pages: value.pages,
-      //       size: value.size,
-      //       total: value.total
-      //     }
-
-      //     // let pageInfo = {
-      //     //   current: 1,
-      //     //   pages: 10,
-      //     //   size: 20,
-      //     //   total: 50
-      //     // }
-      //     res.data.data.pageInfo = pageInfo
-      //     // res = Object.assign(res.data.data, pageInfo)
-      //     console.log(res)
-      //   }
-      //   // 改写返回值属性
-      // } catch (e) {
-      //   // console.log(e)
-      // }
-
-      const {
-        data,
-        status
-      } = res
-
-      // 需要进行验证
-      return {
-        data,
-        status
+      let page = response.data.data
+      let list = []
+      let pageInfo = {}
+      if (page != null) {
+        pageInfo = {
+          currentPage: page.current,
+          size: page.size,
+          pages: page.pages,
+          total: page.total
+        }
+        list = page.records
+        // 整合分页数据
+        response = Object.assign(response.data, {
+          pageInfo: pageInfo,
+          list: list
+        })
+      } else {
+        response = response.data
       }
+      console.log(response)
+
+      return response
     }, error => {
       this.destroy(url)
       addErrorLog(error.response)

@@ -12,6 +12,20 @@ import installPlugin from '@/plugin'
 import 'iview/dist/styles/iview.css'
 import './index.less'
 import '@/assets/icons/iconfont.css'
+
+// 组件注册
+import components from '@/libs/components.js'
+
+// 导入默认数据
+import constV from './libs/u/constV'
+
+// 封装的弹框方法
+import alertInfo from './libs/u/utis'
+Vue.use(components)
+// 注入原型，全局通用
+Vue.prototype.$constV = constV.constDefaule
+Vue.prototype.$alertInfo = alertInfo
+
 // 实际打包时应该不引入mock
 /* eslint-disable */
 if (process.env.NODE_ENV !== 'production') require('@/mock')

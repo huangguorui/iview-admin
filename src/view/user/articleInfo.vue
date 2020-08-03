@@ -1,6 +1,7 @@
 <template>
   <div>
     文章详情
+    {{$route.params}}
   </div>
 </template>
 
