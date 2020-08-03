@@ -25,8 +25,19 @@ export default [{
   },
   component: () => import('@/view/login/login.vue')
 },
+
 {
-  path: '/',
+  path: '/', // 必须项
+  name: 'index', // 必须项，后面缓存页面需要用到，且这个name是唯一的
+  meta: {
+    title: '首页',
+    hideInMenu: true // 是否在左侧菜单中隐藏，默认为false
+  },
+  component: () => import('@/view/user/index.vue')
+},
+
+{
+  path: '/admin',
   name: '_home',
   redirect: '/home',
   component: Main,
@@ -46,15 +57,15 @@ export default [{
     component: () => import('@/view/single-page/home')
   }]
 },
-{
-  path: '/home',
-  name: 'home',
-  meta: {
-    title: '首页',
-    icon: 'ios-book'
-  },
-  component: () => import('@/view/single-page/home')
-},
+// {
+//   path: '/home',
+//   name: 'home',
+//   meta: {
+//     title: '首页',
+//     icon: 'ios-book'
+//   },
+//   component: () => import('@/view/single-page/home')
+// },
 {
   path: '',
   name: 'doc',
@@ -169,21 +180,11 @@ export default [{
 },
 
 {
-  path: '/index', // 必须项
-  name: 'index', // 必须项，后面缓存页面需要用到，且这个name是唯一的
-  meta: {
-    title: '首页',
-    hideInMenu: true // 是否在左侧菜单中隐藏，默认为false
-  },
-  component: () => import('@/view/user/index.vue')
-},
-
-{
-  path: '/articleInfo', // 必须项
-  name: 'articleInfo', // 必须项，后面缓存页面需要用到，且这个name是唯一的
+  path: '/articleInfo',
+  name: 'articleInfo',
   meta: {
     title: '文章详情',
-    hideInMenu: true // 是否在左侧菜单中隐藏，默认为false
+    hideInMenu: true
   },
   component: () => import('@/view/user/articleInfo.vue')
 },
