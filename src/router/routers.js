@@ -79,7 +79,7 @@ export default [{
       icon: 'md-funnel',
       title: '管理员列表'
     },
-    component: () => import('@/view/adminManage/adminList.vue')
+    component: () => import('@/view/admin/adminManage/adminList.vue')
   },
   {
     path: 'roleList',
@@ -88,7 +88,7 @@ export default [{
       icon: 'md-funnel',
       title: '权限列表'
     },
-    component: () => import('@/view/adminManage/roleList.vue')
+    component: () => import('@/view/admin/adminManage/roleList.vue')
   },
   {
     path: 'permissionList',
@@ -97,7 +97,7 @@ export default [{
       icon: 'md-funnel',
       title: '资源列表'
     },
-    component: () => import('@/view/adminManage/permissionList.vue')
+    component: () => import('@/view/admin/adminManage/permissionList.vue')
   }
   ]
 },
@@ -117,7 +117,7 @@ export default [{
       icon: 'md-funnel',
       title: '文章添加'
     },
-    component: () => import('@/view/articleManage/articleAdd.vue')
+    component: () => import('@/view/admin/articleManage/articleAdd.vue')
   },
   {
     path: 'articleList',
@@ -126,7 +126,7 @@ export default [{
       icon: 'md-funnel',
       title: '文章列表'
     },
-    component: () => import('@/view/articleManage/articleList.vue')
+    component: () => import('@/view/admin/articleManage/articleList.vue')
   },
   {
     path: 'articleColumn',
@@ -135,7 +135,7 @@ export default [{
       icon: 'md-funnel',
       title: '文章分类'
     },
-    component: () => import('@/view/articleManage/articleColumn.vue')
+    component: () => import('@/view/admin/articleManage/articleColumn.vue')
   }
   ]
 },
@@ -154,7 +154,7 @@ export default [{
       icon: 'md-funnel',
       title: '用户列表'
     },
-    component: () => import('@/view/userManage/userList.vue')
+    component: () => import('@/view/admin/userManage/userList.vue')
   },
   {
     path: 'userC',
@@ -163,9 +163,29 @@ export default [{
       icon: 'md-funnel',
       title: '用户操作'
     },
-    component: () => import('@/view/userManage/userList.vue')
+    component: () => import('@/view/admin/userManage/userList.vue')
   }
   ]
+},
+
+{
+  path: '/index', // 必须项
+  name: 'index', // 必须项，后面缓存页面需要用到，且这个name是唯一的
+  meta: {
+    title: '首页',
+    hideInMenu: true // 是否在左侧菜单中隐藏，默认为false
+  },
+  component: () => import('@/view/user/index.vue')
+},
+
+{
+  path: '/articleInfo', // 必须项
+  name: 'articleInfo', // 必须项，后面缓存页面需要用到，且这个name是唯一的
+  meta: {
+    title: '文章详情',
+    hideInMenu: true // 是否在左侧菜单中隐藏，默认为false
+  },
+  component: () => import('@/view/user/articleInfo.vue')
 },
 
 {
