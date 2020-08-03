@@ -37,6 +37,16 @@ export default [{
 },
 
 {
+  path: '/custom',
+  name: 'custom',
+  meta: {
+    title: '首页',
+    hideInMenu: true
+  },
+  component: () => import('@/view/user/custom.vue')
+},
+
+{
   path: '/admin',
   name: '_home',
   redirect: '/home',
@@ -57,15 +67,15 @@ export default [{
     component: () => import('@/view/single-page/home')
   }]
 },
-// {
-//   path: '/home',
-//   name: 'home',
-//   meta: {
-//     title: '首页',
-//     icon: 'ios-book'
-//   },
-//   component: () => import('@/view/single-page/home')
-// },
+  // {
+  //   path: '/home',
+  //   name: 'home',
+  //   meta: {
+  //     title: '首页',
+  //     icon: 'ios-book'
+  //   },
+  //   component: () => import('@/view/single-page/home')
+  // },
 {
   path: '',
   name: 'doc',
