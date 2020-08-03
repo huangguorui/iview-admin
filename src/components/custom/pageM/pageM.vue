@@ -1,7 +1,7 @@
 <style lang="less" scoped>
 .page {
   text-align: center;
-  margin-bottom: 3%;
+  margin-top: 2%;
 }
 </style>
 

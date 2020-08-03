@@ -1,22 +1,4 @@
 <style lang="less" scoped>
-.col {
-  padding: 16px;
-  background: #fff;
-  height: 100%;
-  border: 10px;
-  // & :hover col {
-  //   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
-  //   border-color: #eee;
-  //   // border: 1px solid #dcdee2;
-  //   border-radius: 10px;
-  // }
-}
-.btn {
-  button {
-    margin-right: 15px;
-  }
-  margin-bottom: 15px;
-}
 </style>
 <template>
   <div>
@@ -89,7 +71,7 @@
   </div>
 </template>
 <script>
-import api from '@/api/data'
+import api from '@/api/permission'
 import page from '@/libs/mixins/page'
 import defaultValue from '@/libs/mixins/defaultValue'
 import list from '@/libs/mixins/list'
