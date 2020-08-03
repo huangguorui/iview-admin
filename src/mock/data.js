@@ -1,5 +1,7 @@
 import Mock from 'mockjs'
-import { doCustomTimes } from '@/libs/util'
+import {
+  doCustomTimes
+} from '@/libs/util'
 const Random = Mock.Random
 
 export const getTableData = req => {

@@ -60,38 +60,42 @@ class HttpRequest {
       //  total
 
       console.log('----------------')
-      try {
-        if (res.data.data.pages != null) {
-          var value = res.data.data
-          // debugger
-          let pageInfo = {
-            current: value.current,
-            pages: value.pages,
-            size: value.size,
-            total: value.total
-          }
+      // try {
+      //   if (res.data.data.pages != null) {
+      //     var value = res.data.data
+      //     // debugger
+      //     let pageInfo = {
+      //       current: value.current,
+      //       pages: value.pages,
+      //       size: value.size,
+      //       total: value.total
+      //     }
 
-          // let pageInfo = {
-          //   current: 1,
-          //   pages: 10,
-          //   size: 20,
-          //   total: 50
-          // }
-          res.data.data.pageInfo = pageInfo
-          // res = Object.assign(res.data.data, pageInfo)
-          console.log(res)
-        }
-        // 改写返回值属性
-      } catch (e) {
-        // console.log(e)
-      }
+      //     // let pageInfo = {
+      //     //   current: 1,
+      //     //   pages: 10,
+      //     //   size: 20,
+      //     //   total: 50
+      //     // }
+      //     res.data.data.pageInfo = pageInfo
+      //     // res = Object.assign(res.data.data, pageInfo)
+      //     console.log(res)
+      //   }
+      //   // 改写返回值属性
+      // } catch (e) {
+      //   // console.log(e)
+      // }
 
-      // const {
-      //   data
-      // } = res
+      const {
+        data,
+        status
+      } = res
 
       // 需要进行验证
-      return data
+      return {
+        data,
+        status
+      }
     }, error => {
       this.destroy(url)
       addErrorLog(error.response)
