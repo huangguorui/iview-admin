@@ -33,7 +33,7 @@ export default {
     },
     isSize: {
       type: Boolean,
-      default: false
+      default: true
     }
 
   },

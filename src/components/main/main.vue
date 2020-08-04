@@ -52,7 +52,9 @@
           </div>
           <Content class="content-wrapper">
             <keep-alive :include="cacheList">
+              <Col class="col">
               <router-view />
+              </Col>
             </keep-alive>
           </Content>
         </Layout>

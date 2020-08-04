@@ -2,7 +2,6 @@
 </style>
 <template>
   <div>
-    <Col class="col">
     <div class="btn">
       <Button @click="isModalClose=true"
               :disabled="delList.length==0?true:false">删除</Button>
@@ -66,7 +65,6 @@
             @pageChange="pageChange"
             :isSize="true"
             @pageSizeChange="pageSizeChange"></page-m>
-    </Col>
 
   </div>
 </template>

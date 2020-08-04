@@ -30,7 +30,7 @@ body {
 .col {
   padding: 2%;
   background: #fff;
-  height: 100%;
+  // height: 100%;
   border: 10px;
   // & :hover col {
   //   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
