@@ -12,6 +12,7 @@
           :page-size="pageData.size"
           :show-total="true"
           :show-sizer="isSize"
+          :page-size-opts="pageSizeOpts"
           @on-change="pageChange"
           @on-page-size-change="pageSizeChange"
           show-elevator
@@ -35,10 +36,11 @@ export default {
       type: Boolean,
       default: true
     }
-
   },
   data () {
     return {
+      pageSizeOpts: [10, 20, 30, 40, 50, 100, 500]
+
     }
   },
   methods: {
