@@ -55,13 +55,14 @@ export default {
     // 数据提交
     submitData (e) {
       this.$refs['formData'].validate((valid) => {
+        console.log(e)
         if (valid) {
           this.isCloseDrawer = false
           // 添加新的数据，拉取列表
           this.apiList.postSaveApi(e).then(res => {
             // 数据处理
             console.log(res)
-            this.getList(this.data)
+            this.getList(this.pageInfo)
             this.$alertInfo.alertInfo(res.code, res.msg)
           }).catch(err => console.log(err))
         } else {
