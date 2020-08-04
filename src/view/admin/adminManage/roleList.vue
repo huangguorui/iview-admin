@@ -144,7 +144,7 @@ export default {
                 },
                 on: {
                   click: () => {
-                    this.$router.push({ path: 'permission', query: { id: params.row.id } })
+                    this.$router.push({ path: 'permissionList', query: { id: params.row.id } })
                     // 防止表格中的数据随着修改而发生改变
                     this.formData = Object.assign({}, params.row)
                   }

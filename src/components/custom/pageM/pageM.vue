@@ -34,7 +34,7 @@ export default {
     },
     isSize: {
       type: Boolean,
-      default: true
+      default: false
     }
   },
   data () {

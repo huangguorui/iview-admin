@@ -19,6 +19,10 @@ import components from '@/libs/components.js'
 // 导入默认数据
 import constV from './libs/u/constV'
 
+// import $ from 'jquery'
+// import 'bootstrap/dist/css/bootstrap.min.css' // 修改
+import 'bootstrap/dist/js/bootstrap.min' // 修改
+
 // 封装的弹框方法
 import alertInfo from './libs/u/utis'
 Vue.use(components)
