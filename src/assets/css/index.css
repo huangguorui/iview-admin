@@ -40,15 +40,15 @@
 .footer {
   margin-top: 20px;
   /* color: #777;
-    padding: 30px 0;
-    margin-top: 70px; */
+  padding: 30px 0;
+  margin-top: 70px; */
 }
 
 
 .search {
   /* margin-top: 15px;
-    padding: 5px;
-    box-sizing: border-box; */
+  padding: 5px;
+  box-sizing: border-box; */
 }
 
 .mt50px {
@@ -70,7 +70,7 @@
 
 .input_style h3,
 .input_style p {
-  text-align: center;
+  /* text-align: center; */
 }
 
 .search div {
@@ -110,7 +110,7 @@ body {
   /* 标准的语法（必须放在最后） */
 
   /* background: url(../images/about.jpg) no-repeat;
-    background-size: cover; */
+  background-size: cover; */
 }
 
 /* 文章页面控制 */
@@ -121,7 +121,7 @@ body {
 }
 
 .article p {
-  text-indent: 2em;
+  /* text-indent: 2em; */
 }
 
 .article .title {

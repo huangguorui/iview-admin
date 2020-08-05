@@ -11,24 +11,33 @@
             style="margin-top:20px">
           <li><a href="#">首页</a></li>
           <li><a href="#">栏目</a></li>
-          <li class="active">文章：约翰尼·德普</li>
+          <li class="active">{{article.title}}</li>
         </ol>
 
         <div class="article">
           <div>
             <div class="plate">
+              <h1 class="title"> {{article.title}}</h1>
+              <p style="text-align:center">发布时间：{{article.created}}</p>
+              <p>前言：</p>
+              <p style="text-indent: 2em;">{{article.description}}</p>
+              <p>正文：</p>
 
-              <h1 class="title"> 119 约翰尼·德普 5页 表格 flash 视频 音乐</h1>
+              <div v-html="article.content"> </div>
+
+              <!-- <div class="hots">当前文章共有6人赞同</div>
               <p> 购买时请把详细要求和模板编号发给我</p>
-              <p> 作品介绍：可另付费修改，承诺：每份网页记录去向，绝不会有撞车情况！</p>
-              <img src="../../assets/images/about.jpg"
+              <p> 作品介绍：可另付费修改，承诺：每份网页记录去向，绝不会有撞车情况！</p> -->
+
+              <!-- <img src="../../assets/images/about.jpg"
                    alt="">
               <img src="../../assets/images/about.jpg"
-                   alt="">
+                   alt=""> -->
             </div>
 
             <hr>
-            <div class="row">
+            <div class="row"
+                 v-show="false">
               <div class="col-md-4 col-lg-4">
                 <div class="thumbnail">
                   <img src="../../assets/images/weixin.png"
@@ -80,12 +89,34 @@
 </template>
 <script>
 import $ from 'jquery'
+import api from '@/api/article'
 
 // 点击图片放大全屏end
 export default {
+
+  created () {
+    console.log(this.$route.params.id)
+    this.getList(this.$route.params.id)
+  },
   data () {
     return {
+      article: {
+        created: '',
+        content: '',
+        description: '',
+        id: '',
+        status: '',
+        title: '',
+        userId: 1
+      }
+    }
+  },
 
+  methods: {
+    getList (data) {
+      api.getArticleInfo(data).then(res => {
+        this.article = res.data
+      }).catch(err => console.log(err))
     }
   },
   mounted () {
@@ -127,8 +158,6 @@ export default {
     } else {
       alert('爷，现在都什么时代了，你还在用这么土的浏览器~~')
     }
-  },
-  methods: {
   }
 }
 </script>

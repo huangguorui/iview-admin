@@ -84,7 +84,7 @@
                 <img src="../../assets/images/about.jpg"
                      alt="...">
                 <div class="caption">
-                  <h3>标题：{{item.title}}</h3>
+                  <h3 style="font-size:16px">{{item.title}}</h3>
 
                   <p>ID：{{item.id}}</p>
                   <p>网站名称：我的博客</p>
@@ -190,14 +190,7 @@ export default {
   },
 
   created () {
-    console.log(api)
     this.getApi(api)
-    // console.log(getTableData().then(res => {
-    //   console.log(res)
-    //   console.log(res.list)
-    //   this.list = res.list
-    //   this.pageInfo = res.pageInfo
-    // }))
   }
 }
 

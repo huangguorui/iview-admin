@@ -48,7 +48,7 @@ export default {
         this.delList = []
         this.isModalLoading = false
         this.isModalClose = false
-        this.getList(this.data)
+        this.getList(this.pageInfo)
         this.$alertInfo.alertInfo(res.code, res.msg)
       }).catch(err => console.log(err))
     },

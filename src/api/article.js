@@ -9,6 +9,12 @@ export default {
 
     })
   },
+  getArticleInfo (params) {
+    return axios.request({
+      url: 'http://localhost:8081/article/' + params,
+      method: 'get'
+    })
+  },
   postSaveApi (params) {
     return axios.request({
       url: 'article/save',
@@ -23,4 +29,5 @@ export default {
       method: 'post'
     })
   }
+
 }

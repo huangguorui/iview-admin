@@ -45,7 +45,9 @@
           <FormItem label="文章前言"
                     prop="description"
                     label-position="top">
-            <Input v-model="formData.description"
+            <Input type="textarea"
+                   v-model="formData.description"
+                   :rows="3"
                    placeholder="文章前言" />
           </FormItem>
           <FormItem label="文章内容"
