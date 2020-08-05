@@ -25,8 +25,15 @@ export default [{
   },
   component: () => import('@/view/login/login.vue')
 },
-
 {
+  path: '/reg',
+  name: 'reg',
+  meta: {
+    title: 'reg - 注册',
+    hideInMenu: true
+  },
+  component: () => import('@/view/reg/reg.vue')
+}, {
   path: '/', // 必须项
   name: 'index', // 必须项，后面缓存页面需要用到，且这个name是唯一的
   meta: {
@@ -45,7 +52,24 @@ export default [{
   },
   component: () => import('@/view/user/custom.vue')
 },
-
+{
+  path: '/help',
+  name: 'help',
+  meta: {
+    title: '帮助中心',
+    hideInMenu: true
+  },
+  component: () => import('@/view/user/help.vue')
+},
+{
+  path: '/pay',
+  name: 'pay',
+  meta: {
+    title: '支付方式',
+    hideInMenu: true
+  },
+  component: () => import('@/view/user/pay.vue')
+},
 {
   path: '/admin',
   name: '_home',
@@ -84,8 +108,7 @@ export default [{
     href: 'https://lison16.github.io/iview-admin-doc/#/',
     icon: 'ios-book'
   }
-},
-{
+}, {
   path: '/adminManage',
   name: 'adminManage',
   meta: {
@@ -159,8 +182,7 @@ export default [{
     component: () => import('@/view/admin/articleManage/articleColumn.vue')
   }
   ]
-},
-{
+}, {
   path: '/user',
   name: 'user',
   meta: {
@@ -246,24 +268,21 @@ export default [{
     component: () => import('@/view/multilevel/level-2-3.vue')
   }
   ]
-},
-{
+}, {
   path: '/401',
   name: 'error_401',
   meta: {
     hideInMenu: true
   },
   component: () => import('@/view/error-page/401.vue')
-},
-{
+}, {
   path: '/500',
   name: 'error_500',
   meta: {
     hideInMenu: true
   },
   component: () => import('@/view/error-page/500.vue')
-},
-{
+}, {
   path: '*',
   name: 'error_404',
   meta: {

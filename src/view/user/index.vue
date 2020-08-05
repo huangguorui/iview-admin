@@ -8,7 +8,7 @@
       <user-header-m></user-header-m>
 
       <div class="container  mt50px">
-        <div class=" search">
+        <!-- <div class=" search">
           <div>网页主题：
 
             <button class="btn btn-default"
@@ -71,7 +71,7 @@
                     type="submit">论文</button>
           </div>
 
-        </div>
+        </div> -->
 
         <div class="row">
           <div class="col-md-3 col-lg-3"

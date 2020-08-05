@@ -14,7 +14,7 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand"
-             href="#">大学生作业网</a>
+             href="/">大学生作业网</a>
         </div>
 
         <div class="collapse navbar-collapse"
@@ -24,10 +24,10 @@
           </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="./index">首页</a></li>
-            <li><a href="./custom">网页定制</a></li>
-            <li><a href="./pay">支付方式</a></li>
-            <li><a href="free">免费下载专区</a></li>
+            <li><a href="./">首页</a></li>
+            <li><a href="custom">网页定制</a></li>
+             <li><a href="./pay">支付方式</a></li>
+            <!-- <li><a href="free">免费下载专区</a></li> -->
             <li><a href="help">帮助中心</a></li>
             <li><a href="./login">登录</a></li>
             <li><a href="./reg">注册</a></li>
