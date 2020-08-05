@@ -24,23 +24,69 @@
           </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="./">首页</a></li>
-            <li><a href="custom">网页定制</a></li>
-             <li><a href="./pay">支付方式</a></li>
+            <li><a href="/">首页</a></li>
+            <li><a href="/custom">网页定制</a></li>
+            <li><a href="/pay">支付方式</a></li>
             <!-- <li><a href="free">免费下载专区</a></li> -->
-            <li><a href="help">帮助中心</a></li>
-            <li><a href="./login">登录</a></li>
-            <li><a href="./reg">注册</a></li>
-            <form class="navbar-form navbar-left">
-              <div class="form-group">
-                <input type="text"
-                       class="form-control"
-                       placeholder="搜索">
+            <li><a href="/help">帮助中心</a></li>
+            <!-- <li><a href="/login">登录</a></li>
+            <li><a href="/reg">注册</a></li> -->
+
+            <!-- <li>
+              <form class="form-inline">
+                <div class="form-group">
+                  <label class="sr-only"
+                         for="exampleInputEmail3">Email address</label>
+                  <input type="email"
+                         class="form-control"
+                         id="exampleInputEmail3"
+                         placeholder="Email">
+                </div>
+                <div class="form-group">
+                  <label class="sr-only"
+                         for="exampleInputPassword3">Password</label>
+                  <input type="password"
+                         class="form-control"
+                         id="exampleInputPassword3"
+                         placeholder="Password">
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox"> Remember me
+                  </label>
+                </div>
+                <button type="submit"
+                        class="btn btn-default">Sign in</button>
+              </form>
+            </li> -->
+
+            <li class="search">
+              <div>
+                <div class="input-group">
+                  <input type="text"
+                         class="form-control"
+                         placeholder="标题查找">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default"
+                            type="button">查找</button>
+                  </span>
+                </div><!-- /input-group -->
               </div>
-              <button type="submit"
-                      class="btn btn-default">搜索</button>
-            </form>
-            <li class="dropdown">
+            </li>
+            <li class="search">
+              <div>
+                <div class="input-group">
+                  <input type="text"
+                         class="form-control"
+                         placeholder="提取码">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default"
+                            type="button">搜索</button>
+                  </span>
+                </div><!-- /input-group -->
+              </div>
+            </li>
+            <!-- <li class="dropdown">
               <a href="#"
                  class="dropdown-toggle"
                  data-toggle="dropdown"
@@ -53,7 +99,7 @@
                     class="divider"></li>
                 <li><a href="#">退出</a></li>
               </ul>
-            </li>
+            </li> -->
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
