@@ -24,6 +24,20 @@
                 <p> 购买时请把详细要求和模板编号发给我</p>
                 <p> 作品介绍：可另付费修改，承诺：每份网页记录去向，绝不会有撞车情况！</p>
               </div>
+              <p class="strong">技术标签：</p>
+
+              <!-- <tag v-for="(item,i) in article.tags"
+                   :key="i"
+                   :color="color[i]">
+                {{item}}
+              </tag> -->
+
+              <router-link tag="a"
+                           v-for="(item,i) in article.tags"
+                           :key="i"
+                           :to="{path:'/tag/'+item}">
+                <Tag :color="color[i]"> {{item}}</Tag>
+              </router-link>
 
               <p class="strong">前言：</p>
               <p style="text-indent: 2em;">{{article.description}}</p>
@@ -94,9 +108,11 @@
 <script>
 import $ from 'jquery'
 import api from '@/api/article'
+import defaultValue from '@/libs/mixins/defaultValue'
 
 // 点击图片放大全屏end
 export default {
+  mixins: [defaultValue],
 
   created () {
     console.log(this.$route.params.id)
@@ -120,6 +136,7 @@ export default {
     getList (data) {
       api.getArticleInfo(data).then(res => {
         this.article = res.data
+        this.article.tags = this.article.tags.split(',')
       }).catch(err => console.log(err))
     }
   },

@@ -104,16 +104,16 @@
                    alt="...">
               <div class="caption">
                 <h3 class="truncate-text"
-                    style="font-size:16px">标题：{{item.title}}</h3>
+                    style="font-size:16px">名称：{{item.title}}</h3>
 
                 <p>ID：<Tag size="medium">{{item.id}}</Tag>
                 </p>
                 <!-- <p>我的博客</p> -->
                 <p>
-                  价格： <Tag size="medium">30 元</Tag>
+                  价格： <Tag size="medium">{{item.price}}元</Tag>
                 </p>
                 <p>
-                  页数： <Tag size="medium">5 页</Tag>
+                  页数： <Tag size="medium">{{item.pages}} 页</Tag>
                 </p>
 
                 <Poptip trigger="hover"
@@ -126,7 +126,7 @@
 
                     <router-link exact
                                  tag="a"
-                                 v-for="(item,i) in tags"
+                                 v-for="(item,i) in item.tags"
                                  :key="i"
                                  :to="{path:'/tag/'+item}">
                       <Tag :color="color[i]"
@@ -136,15 +136,9 @@
                   </p>
                   <div class="api"
                        slot="content">
-                    <!-- <router-link exact
-                                 tag="Tag"
-                                 v-for="(item,i) in tags"
-                                 :key="i"
-                                 :to="{path:'/tag/'+item}">
-                      {{item}}
-                    </router-link> -->
+
                     <router-link tag="a"
-                                 v-for="(item,i) in tags"
+                                 v-for="(item,i) in item.tags"
                                  :key="i"
                                  :to="{path:'/tag/'+item}">
                       <Tag :color="color[i]"> {{item}}</Tag>
@@ -284,7 +278,6 @@ export default {
     return {
       text: 'html css css3 html5 css3 vue-clihtml css css3 html5 css3 vue-clihtml css css3 html5 css3 vue-clihtml css css3 html5 css3 vue-clihtml css css3 html5 css3 vue-clihtml css css3 html5 css3 vue-cli',
       tags: ['html', 'css', 'css3', 'html5', 'vue', 'table', 'html', 'css', 'css3', 'html5', 'vue', 'table'],
-      color: ['default', 'primary', 'success', 'warning', 'error', 'blue', 'green', 'red', 'yellow', 'pink', 'magenta', 'volcano', 'orange', 'gold', 'lime', 'cyan', 'geekblue', 'purple'],
       orderId: '',
       list: [
         {
@@ -308,7 +301,21 @@ export default {
     this.getApi(api)
     //     color = color.split('、')
   },
+  mounted () {
+  },
   methods: {
+    getList (data) {
+      this.apiList.getListApi(data).then(res => {
+        // 数据处理
+        this.pageInfo = res.pageInfo
+        this.list = res.list
+        this.list.forEach((item, i) => {
+          console.log(item.tags)
+          this.list[i].tags = item.tags.split(',')
+        })
+        console.log(this.list)
+      }).catch(err => console.log(err))
+    },
     asyncOK () {
       setTimeout(() => {
         this.isModal = false

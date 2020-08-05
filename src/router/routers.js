@@ -180,6 +180,15 @@ export default [{
       title: '文章分类'
     },
     component: () => import('@/view/admin/articleManage/articleColumn.vue')
+  },
+  {
+    path: 'articleTag',
+    name: 'articleTag',
+    meta: {
+      icon: 'md-funnel',
+      title: '文章标签'
+    },
+    component: () => import('@/view/admin/articleManage/articleTag.vue')
   }
   ]
 }, {

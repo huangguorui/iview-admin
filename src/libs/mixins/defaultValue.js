@@ -6,6 +6,8 @@ export default {
   name: 'defaultValue',
   data () {
     return {
+      color: ['default', 'primary', 'success', 'warning', 'error', 'blue', 'green', 'red', 'yellow', 'pink', 'magenta', 'volcano', 'orange', 'gold', 'lime', 'cyan', 'geekblue', 'purple'],
+
       isModalLoading: false, // 模态框loading状态
       isModalClose: false, // 是否关闭模态框
       isTableLoading: true, // 表格loading
