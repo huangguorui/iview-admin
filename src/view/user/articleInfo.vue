@@ -36,7 +36,8 @@
                            v-for="(item,i) in article.tags"
                            :key="i"
                            :to="{path:'/tag/'+item}">
-                <Tag :color="color[i]"> {{item}}</Tag>
+                <Tag :color="color[i]"
+                     size="large"> {{item}}</Tag>
               </router-link>
 
               <p class="strong">前言：</p>
@@ -47,10 +48,10 @@
 
               <!-- <div class="hots">当前文章共有6人赞同</div>
  -->
-              <img src="../../assets/images/about.jpg"
+              <!-- <img src="../../assets/images/about.jpg"
                    alt="">
               <img src="../../assets/images/about.jpg"
-                   alt="">
+                   alt=""> -->
             </div>
 
             <hr>

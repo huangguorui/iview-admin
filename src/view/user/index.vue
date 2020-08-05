@@ -110,7 +110,7 @@
                 </p>
                 <!-- <p>我的博客</p> -->
                 <p>
-                  价格： <Tag size="medium">{{item.price}}元</Tag>
+                  价格： <Tag size="medium">{{item.price}} 元</Tag>
                 </p>
                 <p>
                   页数： <Tag size="medium">{{item.pages}} 页</Tag>
@@ -130,7 +130,7 @@
                                  :key="i"
                                  :to="{path:'/tag/'+item}">
                       <Tag :color="color[i]"
-                           v-if="i<=2"> {{item}}</Tag>
+                           v-if="i<=1"> {{item}}</Tag>
                     </router-link>
                     …
                   </p>

@@ -85,7 +85,7 @@ export default {
     // 搜索数据
     searchData () {
       this.getList(this.pageInfo)
-      // console.log(this)
+      console.log(this.pageInfo)
     },
     // 关闭组件侧拉框
     closeDrawer () {

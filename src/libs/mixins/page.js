@@ -10,7 +10,8 @@ export default {
         currentPage: 1,
         size: this.$constV.page, // 初始页数，10页
         pages: 1,
-        total: 1
+        total: 1,
+        permissionName: null // 资源名称
       }
       // query: {
       //     search: '', //搜索

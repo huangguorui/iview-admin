@@ -77,7 +77,7 @@ class HttpRequest {
       } else {
         response = response.data
       }
-      console.log(response)
+      // console.log(response)
 
       return response
     }, error => {

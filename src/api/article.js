@@ -11,7 +11,7 @@ export default {
   },
   getArticleInfo (params) {
     return axios.request({
-      url: 'http://localhost:8081/article/' + params,
+      url: '/article/' + params,
       method: 'get'
     })
   },
