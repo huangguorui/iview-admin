@@ -39,6 +39,7 @@
                   label-position="top"
                   prop="tags">
           <Input v-model="formData.tags"
+                 :disabled="true"
                  placeholder="技术标签" />
         </FormItem>
 
@@ -57,6 +58,7 @@
         <Button v-for="(item,i) in tags"
                 @click="tagSelect(item)"
                 :key="i"
+                size="large"
                 :type="item.isTagDisable?'primary':'default'">
           <!-- :disabled="item.isTagDisable" -->
           {{item.tagName}}
@@ -148,6 +150,30 @@ export default {
     this.getTag()
   },
   methods: {
+
+    // 数据提交
+    submitData (e) {
+      this.$refs['formData'].validate((valid) => {
+        console.log(e)
+        if (valid) {
+          this.isCloseDrawer = false
+          // 添加新的数据，拉取列表
+          this.apiList.postSaveApi(e).then(res => {
+            // 数据处理
+            console.log(res)
+            this.getList(this.pageInfo)
+            this.$alertInfo.alertInfo(res.code, res.msg)
+            this.$refs['formData'].resetFields() // 清除数据
+
+            // 清除缓存
+            localStorage.setItem('editorCache', '')
+          }).catch(err => console.log(err))
+        } else {
+          this.$Message.error(this.$constV.inputTextRule)
+        }
+      })
+    },
+
     tagSelect (data) {
       let str = ''
       console.log(data.isTagDisable)

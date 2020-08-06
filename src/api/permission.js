@@ -11,14 +11,14 @@ export default {
   },
   postSaveApi (params) {
     return axios.request({
-      url: 'permission/save',
+      url: '/permission/save',
       data: params,
       method: 'post'
     })
   },
   postDeleteApi (params) {
     return axios.request({
-      url: 'permission/delete',
+      url: '/permission/delete',
       data: params,
       method: 'post'
     })

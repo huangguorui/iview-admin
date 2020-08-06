@@ -11,14 +11,14 @@ export default {
   },
   postSaveApi (params) {
     return axios.request({
-      url: 'role/save',
+      url: '/role/save',
       data: params,
       method: 'post'
     })
   },
   postDeleteApi (params) {
     return axios.request({
-      url: 'role/delete',
+      url: '/role/delete',
       data: params,
       method: 'post'
     })

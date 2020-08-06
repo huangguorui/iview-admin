@@ -64,6 +64,7 @@ export default {
             console.log(res)
             this.getList(this.pageInfo)
             this.$alertInfo.alertInfo(res.code, res.msg)
+            this.$refs['formData'].resetFields() // 清除数据
           }).catch(err => console.log(err))
         } else {
           this.$Message.error(this.$constV.inputTextRule)

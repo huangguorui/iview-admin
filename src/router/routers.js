@@ -189,7 +189,17 @@ export default [{
       title: '文章标签'
     },
     component: () => import('@/view/admin/articleManage/articleTag.vue')
+  },
+  {
+    path: 'customList',
+    name: 'customList',
+    meta: {
+      icon: 'md-funnel',
+      title: '定制列表'
+    },
+    component: () => import('@/view/admin/articleManage/customList.vue')
   }
+
   ]
 }, {
   path: '/user',

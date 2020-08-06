@@ -10,7 +10,7 @@
       <!-- @on-change="searchData" -->
       <Input v-model="pageInfo.permissionName"
              placeholder="请输入需要搜索的文字"
-             style="width: 300px" />
+             style="width: 150px;margin-right:15px" />
       <Button type="primary"
               @click="searchData">搜索</Button>
     </div>

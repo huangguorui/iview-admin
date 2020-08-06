@@ -27,8 +27,8 @@
             </Col>
             <Col span="11">
             <FormItem label="请输入电话"
-                      prop="phone">
-              <Input v-model="formData.phone"
+                      prop="peoplePhone">
+              <Input v-model="formData.peoplePhone"
                      placeholder="请输入电话"></Input>
             </FormItem>
             </Col>
@@ -37,8 +37,8 @@
           <Row>
             <Col span="11">
             <FormItem label="请输入邮箱"
-                      prop="mail">
-              <Input v-model="formData.mail"
+                      prop="peopleEmail">
+              <Input v-model="formData.peopleEmail"
                      placeholder="请输入邮箱"></Input>
             </FormItem>
             </Col>
@@ -59,8 +59,8 @@
           </Row>
 
           <FormItem label="需求概述"
-                    prop="describe">
-            <Input v-model="formData.describe"
+                    prop="peopleDescribe">
+            <Input v-model="formData.peopleDescribe"
                    type="textarea"
                    :autosize="{minRows: 5,maxRows: 20}"
                    placeholder="需求概述：请告知我们产品的使用品台、功能需求、数量等"></Input>
@@ -68,9 +68,9 @@
 
           <FormItem>
             <Button type="primary"
-                    @click="handleSubmit('formData')">Submit</Button>
+                    @click="submitData(formData)">提交</Button>
             <Button @click="handleReset('formData')"
-                    style="margin-left: 8px">Reset</Button>
+                    style="margin-left: 8px">取消</Button>
           </FormItem>
         </Form>
       </div>
@@ -80,7 +80,16 @@
   </div>
 </template>
 <script>
+
+import api from '@/api/custom'
+import page from '@/libs/mixins/page'
+import defaultValue from '@/libs/mixins/defaultValue'
+import list from '@/libs/mixins/list'
 export default {
+  mixins: [defaultValue, list, page],
+  created () {
+    this.getApi(api)
+  },
   data () {
     return {
       porjectType: [{
@@ -98,9 +107,9 @@ export default {
       }],
       formData: {
         peopleName: '',
-        mail: '',
-        phone: '',
-        describe: '',
+        peopleEmail: '',
+        peoplePhone: '',
+        peopleDescribe: '',
         porjectType: ''
       },
       ruleValidate: {
@@ -108,18 +117,18 @@ export default {
         peopleName: [
           { required: true, message: '请输入联系人', trigger: 'blur' }
         ],
-        phone: [
+        peoplePhone: [
           { required: true, message: '请输入电话', trigger: 'blur' }
         ],
 
         porjectType: [
           { required: true, message: '项目类型不能为空', trigger: 'blur' }
         ],
-        mail: [
+        peopleEmail: [
           { required: true, message: '请输入邮箱', trigger: 'blur' },
           { type: 'email', message: '电子邮件格式不正确', trigger: 'blur' }
         ],
-        describe: [
+        peopleDescribe: [
           { required: true, message: '请输入需求概述', trigger: 'blur' },
           { type: 'string', min: 20, message: '字数不能少于20', trigger: 'blur' }
         ]
@@ -127,16 +136,32 @@ export default {
     }
   },
   methods: {
-    handleSubmit (name) {
-      this.$refs[name].validate((valid) => {
+    // 数据提交
+    submitData (e) {
+      this.$refs['formData'].validate((valid) => {
         if (valid) {
-          console.log(this.formData)
-          this.$Message.success('Success!')
+          // 添加新的数据，拉取列表
+          this.apiList.postSaveApi(e).then(res => {
+            console.log(e)
+            // 数据处理
+            this.$alertInfo.alertInfo(res.code, res.msg)
+            this.$refs['formData'].resetFields() // 清除数据
+          }).catch(err => console.log(err))
         } else {
-          this.$Message.error('Fail!')
+          this.$Message.error(this.$constV.inputTextRule)
         }
       })
     },
+    // handleSubmit (name) {
+    //   this.$refs[name].validate((valid) => {
+    //     if (valid) {
+    //       console.log(this.formData)
+    //       this.$Message.success('Success!')
+    //     } else {
+    //       this.$Message.error('Fail!')
+    //     }
+    //   })
+    // },
     handleReset (name) {
       this.$refs[name].resetFields()
     }
