@@ -9,8 +9,8 @@
       <Button @click="addData('formData')"
               type="primary">{{title.addTitle}}</Button>
       <!-- @on-change="searchData" -->
-      <Input v-model="pageInfo.permissionName"
-             placeholder="请输入需要搜索的文字"
+      <Input v-model.trim="pageInfo.blogId"
+             placeholder="请输入需要搜索的文章ID"
              style="width: 150px;margin-right:15px" />
 
       <Button type="primary"

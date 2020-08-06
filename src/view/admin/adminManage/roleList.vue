@@ -10,7 +10,7 @@
       <Button @click="addData('formData')"
               type="primary">添加角色</Button>
       <!-- @on-change="searchData" -->
-      <Input v-model="pageInfo.permissionName"
+      <Input v-model.trim="pageInfo.permissionName"
              placeholder="请输入需要搜索的文字"
              style="width: 150px;margin-right:15px" />
       <Button type="primary"
