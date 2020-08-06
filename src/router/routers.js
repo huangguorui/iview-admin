@@ -189,24 +189,6 @@ export default [{
       title: '文章标签'
     },
     component: () => import('@/view/admin/articleManage/articleTag.vue')
-  },
-  {
-    path: 'customList',
-    name: 'customList',
-    meta: {
-      icon: 'md-funnel',
-      title: '定制列表'
-    },
-    component: () => import('@/view/admin/articleManage/customList.vue')
-  },
-  {
-    path: 'linkList',
-    name: 'linkList',
-    meta: {
-      icon: 'md-funnel',
-      title: '发货管理'
-    },
-    component: () => import('@/view/admin/articleManage/linkList.vue')
   }
 
   ]
@@ -248,7 +230,46 @@ export default [{
   },
   component: () => import('@/view/user/articleInfo.vue')
 },
+{
+  path: '/linkManage',
+  name: 'linkManage',
+  meta: {
+    icon: 'md-menu',
+    title: '百度云盘链接管理'
+  },
+  component: Main,
+  children: [{
+    path: 'linkList',
+    name: 'linkList',
+    meta: {
+      icon: 'md-funnel',
+      title: '百度云盘链接列表'
+    },
+    component: () => import('@/view/admin/linkManage/linkList.vue')
+  }
 
+  ]
+},
+{
+  path: '/customManage',
+  name: 'customManage',
+  meta: {
+    icon: 'md-menu',
+    title: '定制管理'
+  },
+  component: Main,
+  children: [{
+    path: 'customList',
+    name: 'customList',
+    meta: {
+      icon: 'md-funnel',
+      title: '定制列表'
+    },
+    component: () => import('@/view/admin/customManage/customList.vue')
+  }
+
+  ]
+},
 {
   path: '/multilevel',
   name: 'multilevel',

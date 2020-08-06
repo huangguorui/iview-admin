@@ -7,17 +7,17 @@ import iView from 'iview'
 //   getToken,
 //   canTurnTo
 // } from '@/libs/util'
-import config from '@/config'
-const {
-  homeName
-} = config
+// import config from '@/config'
+// const {
+//   homeName
+// } = config
 
 Vue.use(Router)
 const router = new Router({
   routes,
   mode: 'history'
 })
-console.log(homeName)
+// console.log(homeName)
 // 判断是否需要登录权限 以及是否登录
 router.beforeEach((to, from, next) => {
   next()

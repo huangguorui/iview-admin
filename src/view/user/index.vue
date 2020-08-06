@@ -310,10 +310,9 @@ export default {
         this.pageInfo = res.pageInfo
         this.list = res.list
         this.list.forEach((item, i) => {
-          console.log(item.tags)
           this.list[i].tags = item.tags.split(',')
         })
-        console.log(this.list)
+        // console.log(this.list)
       }).catch(err => console.log(err))
     },
     asyncOK () {

@@ -25,7 +25,7 @@ export default {
   methods: {
     // 开始调用
     getApi (apiList) {
-      console.log('----混合开始----')
+      // console.log('----混合开始----')
       this.apiList = apiList
       this.getList(this.pageInfo)
     },
