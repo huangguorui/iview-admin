@@ -27,7 +27,8 @@
       <user-header-m></user-header-m>
 
       <div class="container  mt50px">
-        <div class="search_top">
+        <div class="search_top"
+             v-if="false">
           <div>网页主题：
 
             <button class="btn btn-default"
@@ -91,7 +92,24 @@
           </div>
 
         </div>
+        <table class="table table-bordered  mt50px"
+               style="background:#fff">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>提取链接</th>
+              <th>提取码</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td><a href="http://baiduyun.com/abc">http://baiduyun.com/abc</a></td>
+              <td>FATJ</td>
+            </tr>
 
+          </tbody>
+        </table>
         <div class="row">
           <div class="col-md-3 col-lg-3"
                v-for="item in list"
@@ -171,6 +189,7 @@
         </div>
 
       </div>
+
       <page-m :page-data="pageInfo"
               @pageChange="pageChange"
               @pagSizesChange="pageSizeChange"></page-m>
@@ -276,8 +295,6 @@ export default {
   },
   data () {
     return {
-      text: 'html css css3 html5 css3 vue-clihtml css css3 html5 css3 vue-clihtml css css3 html5 css3 vue-clihtml css css3 html5 css3 vue-clihtml css css3 html5 css3 vue-clihtml css css3 html5 css3 vue-cli',
-      tags: ['html', 'css', 'css3', 'html5', 'vue', 'table', 'html', 'css', 'css3', 'html5', 'vue', 'table'],
       orderId: '',
       list: [
         {

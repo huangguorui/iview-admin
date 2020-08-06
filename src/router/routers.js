@@ -198,6 +198,15 @@ export default [{
       title: '定制列表'
     },
     component: () => import('@/view/admin/articleManage/customList.vue')
+  },
+  {
+    path: 'linkList',
+    name: 'linkList',
+    meta: {
+      icon: 'md-funnel',
+      title: '发货管理'
+    },
+    component: () => import('@/view/admin/articleManage/linkList.vue')
   }
 
   ]
