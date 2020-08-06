@@ -78,10 +78,12 @@
                 <div class="input-group">
                   <input type="text"
                          class="form-control"
+                         v-model.trim="code"
                          placeholder="提取码">
                   <span class="input-group-btn">
                     <button class="btn btn-default"
-                            type="button">搜索</button>
+                            type="button"
+                            @click="getUrl">搜索</button>
                   </span>
                 </div><!-- /input-group -->
               </div>
@@ -104,12 +106,65 @@
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
+    <table class=" url_code table table-bordered "
+           style="background:#fff"
+           v-if="urlCode.id">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>提取链接</th>
+          <th>提取码</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">{{urlCode.id}}</th>
+          <td><a :href="urlCode.url">{{urlCode.url}}</a></td>
+          <td>{{urlCode.code}}</td>
+        </tr>
+        <tr>
+          <span style="font-weight:bold;padding:5px;display:block">注意：点击链接进入百度网盘，输入提取码进行提取。</span>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
 <script>
-export default {
 
+import getUrl from '@/api/link'
+import defaultValue from '@/libs/mixins/defaultValue'
+export default {
+  mixins: [defaultValue],
+
+  data () {
+    return {
+      code: null,
+      urlCode: {
+        url: '',
+        code: '',
+        id: ''
+      }
+    }
+  },
+  methods: {
+    getUrl () {
+      if (this.code == null) {
+        this.$alertInfo.alertInfo(404, '未输入提取码')
+        return false
+      }
+
+      getUrl.getListApi({ code: this.code }).then(res => {
+        // 数据处理
+        if (res.list.length === 0) {
+          this.$alertInfo.alertInfo(404, '未找到数据，请重新输入')
+          return false
+        }
+        this.urlCode = res.list[0]
+        console.log(res.list[0])
+      }).catch(err => console.log(err))
+    }
+  }
 }
 </script>
 
