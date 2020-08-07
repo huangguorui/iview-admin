@@ -73,7 +73,7 @@
                :key="item.id">
             <!-- <router-link exact
                          tag="a"
-                         :to="{path:'/articleInfo/id/'+item.id}"> -->
+                         :to="{path:'/project/id/'+item.id}"> -->
             <div class="thumbnail hf">
               <img :src="item.indexImg==null?'http://localhost:8081/uploads/404.jpg':'http://localhost:8081'+item.indexImg"
                    :alt="item.title"
@@ -137,7 +137,7 @@
                                class="btn btn-default"
                                role="button"
                                style="margin-left:10px"
-                               :to="{path:'/articleInfo/id/'+item.id}">查看详情
+                               :to="{path:'/project/id/'+item.id}">查看详情
                   </router-link>
                 </p>
               </div>
@@ -220,7 +220,7 @@
             <a href="javascript:;">
               <router-link exact
                            tag="h2"
-                           :to="{path:'/articleInfo/id/'+item.id}">
+                           :to="{path:'/project/id/'+item.id}">
                 ID: {{item.id}}------ {{item.title}}</router-link>
             </a>
             {{item.content}}
@@ -233,7 +233,7 @@
             @pagSizesChange="pageSizeChange"></page-m> -->
     <!-- <img src="../../assets/images/login-bg.jpg"> -->
 
-    <!-- <a href="/articleInfo">跳转</a>
+    <!-- <a href="/project">跳转</a>
     <a href="/custom">私人定制</a>
     {{pageInfo}} -->
   </div>

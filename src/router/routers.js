@@ -156,8 +156,8 @@ export default [{
 },
 
 {
-  path: '/article',
-  name: 'article',
+  path: '/articleManage',
+  name: 'articleManage',
   meta: {
     icon: 'md-menu',
     title: '文章管理'
@@ -231,13 +231,13 @@ export default [{
 },
 
 {
-  path: '/articleInfo/id/:id',
-  name: 'articleInfo',
+  path: '/project/id/:id',
+  name: 'project',
   meta: {
     title: '文章详情',
     hideInMenu: true
   },
-  component: () => import('@/view/user/articleInfo.vue')
+  component: () => import('@/view/user/article.vue')
 },
 {
   path: '/linkManage',

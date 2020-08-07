@@ -4,7 +4,7 @@ diff a/src/view/user/index.vue b/src/view/user/index.vue	(rejected hunks)
 +  <div>
 +    首页
 +    {{list}}
-+    <a href="/articleInfo">跳转</a>
++    <a href="/project">跳转</a>
 +  </div>
 +</template>
 +

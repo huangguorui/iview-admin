@@ -9,7 +9,7 @@ export default {
 
     })
   },
-  getArticleInfo (params) {
+  getProject (params) {
     return axios.request({
       url: '/article/' + params,
       method: 'get'
