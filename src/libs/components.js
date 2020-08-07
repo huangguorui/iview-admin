@@ -5,6 +5,7 @@ import tableExpandRow from '@/components/custom//tableM/tableExpandRow'
 import tableExpandRow2 from '@/components/custom//tableM/tableExpandRow2'
 import userHeaderM from '@/components/custom//userHeaderM/userHeaderM'
 import userFooterM from '@/components/custom//userFooterM/userFooterM'
+import pic from '@/view/user/pic'
 
 import modalM from '@/components/custom//modalM/modalM'
 export default (Vue) => {
@@ -16,4 +17,5 @@ export default (Vue) => {
   Vue.component('table-expand-row2', tableExpandRow2)
   Vue.component('user-header-m', userHeaderM)
   Vue.component('user-footer-m', userFooterM)
+  Vue.component('pic', pic)
 }

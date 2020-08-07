@@ -31,6 +31,7 @@ export default {
     },
     // 模块化的数据列表
     getList (data) {
+      // setInterval(() => {
       this.isTableLoading = true
       this.apiList.getListApi(data).then(res => {
         // 数据处理
@@ -38,6 +39,7 @@ export default {
         this.list = res.list
         this.isTableLoading = false
       }).catch(err => console.log(err))
+      // }, 3000)
     },
     // 删除
     deleteData () {

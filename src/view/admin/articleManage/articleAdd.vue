@@ -1,18 +1,56 @@
 <template>
   <div>
-
+    <pic @imgFile="imgFile"></pic>
     <Form :model="formData"
           ref="formData"
           :rules="ruleFormData">
-
+      {{file}}
       <FormItem label="文章标题"
                 label-position="top"
                 prop="title">
         <Input v-model="formData.title"
                placeholder="文章标题" />
       </FormItem>
+      <FormItem label="上传图片"
+                label-position="top"
+                prop="title">
+
+        <input type="file"
+               @change="getFiles($event)" />
+
+      </FormItem>
 
       <Row>
+
+        <Col span="24">
+        <FormItem label="首页图"
+                  label-position="top"
+                  prop="indexImg">
+
+          <Input type="textarea"
+                 v-model="formData.indexImg"
+                 :rows="3"
+                 placeholder="首页图" />
+        </FormItem>
+        </Col>
+        <Col span="8">
+        &nbsp;
+        </Col>
+
+        <Col span="24">
+
+        <FormItem label="详情页图"
+                  label-position="top"
+                  prop="img">
+
+          <Input type="textarea"
+                 v-model="formData.img"
+                 :rows="3"
+                 placeholder="详情页图" />
+
+        </FormItem>
+        </Col>
+
         <Col span="8">
         <FormItem label="页数"
                   label-position="top"
@@ -21,6 +59,7 @@
                  placeholder="页数" />
         </FormItem>
         </Col>
+
         <Col span="8">
         &nbsp;
         </Col>
@@ -109,10 +148,12 @@ export default {
   // },
   data () {
     return {
+      file: [],
       tags: [],
       tagsSelect: [],
       formData: {
-        tags: ''
+        tags: '',
+        img: null
         // status: 1
       },
       ruleFormData: {
@@ -133,9 +174,15 @@ export default {
         ],
         content: [
           { required: true, message: '文章内容不可为空', trigger: 'blur' }
+        ],
+        indexImg: [
+          { required: true, message: '首页图片不可为空', trigger: 'blur' }
+        ],
+        img: [
+          { required: true, message: '图片列表不可为空', trigger: 'blur' }
         ]
-
       },
+
       articleType: [{
         status: 1,
         text: '启用'
@@ -150,7 +197,27 @@ export default {
     this.getTag()
   },
   methods: {
-
+    imgFile (e) {
+      console.log(e)
+      this.file = e
+      this.formData.img = null
+      this.formData.indexImg = e[0].imgText
+      e.forEach((item, i) => {
+        if (this.formData.img === null) {
+          this.formData.img = item.imgText + ','
+        } else {
+          this.formData.img += item.imgText + ','
+        }
+      })
+      this.formData.img = this.formData.img.substr(0, this.formData.img.length - 1)
+      // this.formData.img = this.formData.img.split(',')//字符串转
+      // this.formData.img = Array.from(new Set(this.formData.img))
+      // this.formData.img = this.formData.img.join(',')
+    },
+    getFiles (e) {
+      this.file = e.target.files
+      console.log(e.target.files)
+    },
     // 数据提交
     submitData (e) {
       this.$refs['formData'].validate((valid) => {
@@ -158,6 +225,12 @@ export default {
         if (valid) {
           this.isCloseDrawer = false
           // 添加新的数据，拉取列表
+
+          // let data = {
+          //   blog: this.formData,
+          //   file: this.file
+          // }
+
           this.apiList.postSaveApi(e).then(res => {
             // 数据处理
             console.log(res)

@@ -19,8 +19,6 @@
       </template>
     </div>
 
-    <form action=""></form>
-
     <form method="post"
           enctype="multipart/form-data"
           action="http://localhost:8081/article/pic">
@@ -82,7 +80,8 @@ export default {
       ],
       imgName: '',
       visible: false,
-      uploadList: []
+      uploadList: [],
+      imgFileList: []
     }
   },
   methods: {
@@ -106,10 +105,18 @@ export default {
         file.url = item.imgUrl
         file.name = item.imgName
         // this.defaultList.push(imgInfo)
+
+        this.imgFileList.push({
+          imgUrl: item.imgUrl,
+          imgName: item.imgName,
+          imgText: item.imgText
+        })
+        this.$emit('imgFile', this.imgFileList)
       })
 
       console.log(this.defaultList)
       console.log(res)
+
       // file.url = 'http://192.168.25.1:8081/uploads/logo.jpg'
       // file.name = 'logo.jpg'
     },
@@ -126,31 +133,33 @@ export default {
       })
     },
     handleBeforeUpload () {
-      return new Promise((resolve, reject) => {
-        this.$Modal.confirm({
-          title: 'Title',
-          content: '<p>Content of dialog</p><p>Content of dialog</p>',
-          onOk: () => {
-            resolve()
-            this.$Message.info('Clicked ok')
-          },
-          onCancel: () => {
-            // reject()
+      console.log(this.defaultList)
 
-            this.$Message.info('Clicked cancel')
-          }
-        })
+      //   return new Promise((resolve, reject) => {
+      //     this.$Modal.confirm({
+      //       title: 'Title',
+      //       content: '<p>Content of dialog</p><p>Content of dialog</p>',
+      //       onOk: () => {
+      //         resolve()
+      //         this.$Message.info('Clicked ok')
+      //       },
+      //       onCancel: () => {
+      //         // reject()
 
-        // this.$Model.confirm({
-        //   title: '是否取消',
-        //   onOk: () => {
-        //     resolve()
-        //   },
-        //   onCancel: () => {
-        //     reject()
-        //   }
-        // })
-      })
+      //         this.$Message.info('Clicked cancel')
+      //       }
+      //     })
+
+      //     // this.$Model.confirm({
+      //     //   title: '是否取消',
+      //     //   onOk: () => {
+      //     //     resolve()
+      //     //   },
+      //     //   onCancel: () => {
+      //     //     reject()
+      //     //   }
+      //     // })
+      //   })
 
       //   const check = this.uploadList.length < 5
       //   if (!check) {

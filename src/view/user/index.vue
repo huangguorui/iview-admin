@@ -101,6 +101,11 @@
                   <p class="truncate-text">
                     效果：
 
+                    <Tag :color="color[i]"
+                         v-for="(item,i) in item.tags"
+                         :key="i"
+                         v-if="i<=1"> {{item}}</Tag>
+                    <!--
                     <router-link exact
                                  tag="a"
                                  v-for="(item,i) in item.tags"
@@ -108,7 +113,7 @@
                                  :to="{path:'/tag/'+item}">
                       <Tag :color="color[i]"
                            v-if="i<=1"> {{item}}</Tag>
-                    </router-link>
+                    </router-link> -->
                     …
                   </p>
                   <div class="api"

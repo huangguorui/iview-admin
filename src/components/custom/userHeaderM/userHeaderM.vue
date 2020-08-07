@@ -158,6 +158,7 @@ export default {
         // 数据处理
         if (res.list.length === 0) {
           this.$alertInfo.alertInfo(404, '未找到数据，请重新输入')
+          this.urlCode = []
           return false
         }
         this.urlCode = res.list[0]
