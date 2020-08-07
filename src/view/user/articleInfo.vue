@@ -19,7 +19,7 @@
             <div class="plate">
               <h1 class="title"> {{article.title}}</h1>
               <!-- <p style="text-align:center">发布时间：{{article.created}}</p> -->
-
+              {{article.img}}
               <div class="strong">
                 <p> 购买时请把详细要求和模板编号发给我</p>
                 <p> 作品介绍：可另付费修改，承诺：每份网页记录去向，绝不会有撞车情况！</p>
@@ -42,10 +42,20 @@
 
               <p class="strong">前言：</p>
               <p style="text-indent: 2em;">{{article.description}}</p>
+
+              <p class="strong">效果图展示：</p>
+
+              <div v-for="(imgPath,i) in article.img"
+                   :key="'i'+i">
+                <img :src="'http://localhost:8081'+imgPath"
+                     :alt="article.title">
+                <span class=""
+                      style="text-align:center;display:block;padding:20px">第{{i+1}}个页面</span>
+              </div>
+
               <p class="strong">正文：</p>
 
               <div v-html="article.content">{{article.content}} </div>
-
               <!-- <div class="hots">当前文章共有6人赞同</div>
  -->
               <!-- <img src="../../assets/images/about.jpg"
@@ -138,6 +148,7 @@ export default {
       api.getArticleInfo(data).then(res => {
         this.article = res.data
         this.article.tags = this.article.tags.split(',')
+        this.article.img = this.article.img.split(',')
       }).catch(err => console.log(err))
     }
   },

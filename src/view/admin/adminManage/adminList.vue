@@ -14,8 +14,9 @@
       <Button type="primary"
               @click="searchData">搜索</Button>
     </div>
+    <!-- row-key="id" -->
+
     <Table border
-           row-key="id"
            @on-selection-change="parkCheck"
            @on-row-click="expand"
            ref="selection"

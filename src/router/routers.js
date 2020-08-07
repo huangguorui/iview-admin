@@ -53,6 +53,15 @@ export default [{
   component: () => import('@/view/user/custom.vue')
 },
 {
+  path: '/pic',
+  name: 'pic',
+  meta: {
+    title: '图片测试',
+    hideInMenu: true
+  },
+  component: () => import('@/view/user/pic.vue')
+},
+{
   path: '/help',
   name: 'help',
   meta: {

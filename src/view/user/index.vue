@@ -29,65 +29,40 @@
       <div class="container  mt50px">
         <div class="search_top">
           <div>网页主题：
+            <!-- themeList -->
 
-            <button class="btn btn-default"
-                    type="submit">人物博客</button>
-            <button class="btn btn-default"
-                    type="submit">学校网页</button>
-            <button class="btn btn-default"
-                    type="submit">新闻时政</button>
-            <button class="btn btn-default"
-                    type="submit">电影音乐</button>
-            <button class="btn btn-default"
-                    type="submit">体育运动</button>
-            <button class="btn btn-default"
-                    type="submit">旅游美食</button>
-            <button class="btn btn-default"
-                    type="submit">购物电商</button>
-            <button class="btn btn-default"
-                    type="submit">汽车军事</button>
-            <button class="btn btn-default"
-                    type="submit">文化环保</button>
-            <button class="btn btn-default"
-                    type="submit">公司企业</button>
-            <button class="btn btn-default"
-                    type="submit">其他成品</button>
+            <Tag :color="color[Math.round(Math.random() * color.length-1)]"
+                 v-for="(item,i) in themeList"
+                 :key="i"
+                 size="large"
+                 style="margin-right:5px;"> {{item.themeName}}</Tag>
+
           </div>
+
           <div>网页页数：
-            <button class="btn btn-default"
-                    type="submit">1-2页</button>
-            <button class="btn btn-default"
-                    type="submit">3-5页</button>
-            <button class="btn btn-default"
-                    type="submit"> 6-10页</button>
-            <button class="btn btn-default"
-                    type="submit">11-15页</button>
-            <button class="btn btn-default"
-                    type="submit">16-20页</button>
-            <button class="btn btn-default"
-                    type="submit">21-30页</button>
-            <button class="btn btn-default"
-                    type="submit">30页以上</button>
+            <Tag :color="color[Math.round(Math.random() * color.length-1)]"
+                 v-for="(item,i) in pageList"
+                 :key="i"
+                 size="large"
+                 style="margin-right:5px;"> {{item.pageName}}页</Tag>
 
           </div>
-
           <div>使用技术：
-            <button class="btn btn-default"
-                    type="submit">html+css</button>
-            <button class="btn btn-default"
-                    type="submit">表格</button>
-            <button class="btn btn-default"
-                    type="submit">DIV</button>
-            <button class="btn btn-default"
-                    type="submit">特效</button>
-            <button class="btn btn-default"
-                    type="submit">音乐</button>
-            <button class="btn btn-default"
-                    type="submit">表单</button>
-            <button class="btn btn-default"
-                    type="submit">框架</button>
-            <button class="btn btn-default"
-                    type="submit">论文</button>
+            <!-- <router-link exact
+                         tag="a"
+                         v-for="(item,i) in tagList"
+                         :key="i"
+                         style="padding:5px"
+                         :to="{path:'/tag/'+item.tagName}">
+              <Tag :color="color[Math.round(Math.random() * color.length-1)]"
+                   size="large"
+                   style="margin-right:5px;"> {{item.tagName}}</Tag>
+            </router-link> -->
+            <Tag :color="color[Math.round(Math.random() * color.length-1)]"
+                 v-for="(item,i) in tagList"
+                 :key="i"
+                 size="large"
+                 style="margin-right:5px;"> {{item.tagName}}</Tag>
           </div>
 
         </div>
@@ -99,12 +74,14 @@
             <!-- <router-link exact
                          tag="a"
                          :to="{path:'/articleInfo/id/'+item.id}"> -->
-            <div class="thumbnail">
-              <img src="../../assets/images/about.jpg"
-                   alt="...">
+            <div class="thumbnail hf">
+              <img :src="item.indexImg==null?'http://localhost:8081/uploads/404.jpg':'http://localhost:8081'+item.indexImg"
+                   :alt="item.title"
+                   :title="item.title"
+                   @error="nofindImg">
               <div class="caption">
-                <h3 class="truncate-text"
-                    style="font-size:16px">名称：{{item.title}}</h3>
+                <p class="truncate-text"
+                   style="font-size:16px">名称：{{item.title}}</p>
 
                 <p>ID：<Tag size="medium">{{item.id}}</Tag>
                 </p>
@@ -267,6 +244,7 @@
 // import $ from 'jquery'
 
 import api from '@/api/article'
+import getTag from '@/api/tag'
 import page from '@/libs/mixins/page'
 import defaultValue from '@/libs/mixins/defaultValue'
 import list from '@/libs/mixins/list'
@@ -277,8 +255,62 @@ export default {
   },
   data () {
     return {
+      themeList: [
+        {
+          themeName: '人物博客'
+        },
+        {
+          themeName: '学校网页'
+        },
+        {
+          themeName: '新闻时政'
+        },
+        {
+          themeName: '电影音乐'
+        },
+        {
+          themeName: '体育运动'
+        },
+        {
+          themeName: '旅游美食'
+        },
+        {
+          themeName: '购物电商'
+        },
+        {
+          themeName: '汽车军事'
+        },
+        {
+          themeName: '文化环保'
+        },
+        {
+          themeName: '公司企业'
+        },
+        {
+          themeName: '其他成品'
+        }
+      ],
+
+      pageList: [
+        {
+          page: '2', pageName: '1-2'
+        }, {
+          page: '5', pageName: '3-5'
+        }, {
+          page: '10', pageName: '6-10'
+        }, {
+          page: '15', pageName: '11-15'
+        }, {
+          page: '20', pageName: '16-20'
+        }, {
+          page: '30', pageName: '21-30'
+        }, {
+          page: '31', pageName: '30'
+        }
+      ],
       text: '',
       orderId: '',
+      tagList: [],
       list: [
         {
           created: '',
@@ -314,6 +346,13 @@ export default {
         })
         // console.log(this.list)
       }).catch(err => console.log(err))
+
+      getTag.getListApi({ size: 100 }).then(res => {
+        // 数据处理
+        this.tagList = res.list
+
+        // console.log(this.list)
+      }).catch(err => console.log(err))
     },
     asyncOK () {
       setTimeout(() => {
@@ -323,6 +362,14 @@ export default {
     open (id) {
       this.orderId = id
       this.isModal = true
+    },
+    nofindImg (index) {
+      // console.log(index)
+      // let img = event.srcElement
+
+      // img.src = '../../assets/images/about.jpg'
+
+      // img.onerror = null // 防止一直跳动
     }
   }
 }
