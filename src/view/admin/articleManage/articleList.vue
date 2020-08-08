@@ -146,8 +146,12 @@ export default {
         //   key: 'content'
         // },
         {
+          title: '主题',
+          key: 'themeName'
+        },
+        {
           title: '文章状态',
-          key: 'status'
+          key: 'statusText'
         }, {
           title: '发表人ID',
           key: 'userId'

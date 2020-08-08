@@ -10,7 +10,7 @@
         <ol class="breadcrumb"
             style="margin-top:20px">
           <li><a href="#">首页</a></li>
-          <li><a href="#">栏目</a></li>
+          <li><a href="#">{{article.themeName}}</a></li>
           <li class="active">{{article.title}}</li>
         </ol>
 
@@ -19,21 +19,21 @@
             <div class="plate">
               <h1 class="title"> {{article.title}}</h1>
               <!-- <p style="text-align:center">发布时间：{{article.created}}</p> -->
-              {{article.img}}
+              {{article.imgArr}}
               <div class="strong">
                 <p> 购买时请把详细要求和模板编号发给我</p>
                 <p> 作品介绍：可另付费修改，承诺：每份网页记录去向，绝不会有撞车情况！</p>
               </div>
               <p class="strong">技术标签：</p>
 
-              <!-- <tag v-for="(item,i) in article.tags"
+              <!-- <tag v-for="(item,i) in article.tagsArr"
                    :key="i"
                    :color="color[i]">
                 {{item}}
               </tag> -->
 
               <router-link tag="a"
-                           v-for="(item,i) in article.tags"
+                           v-for="(item,i) in article.tagsArr"
                            :key="i"
                            :to="{path:'/tag/'+item}">
                 <Tag :color="color[i]"
@@ -45,7 +45,7 @@
 
               <p class="strong">效果图展示：</p>
 
-              <div v-for="(imgPath,i) in article.img"
+              <div v-for="(imgPath,i) in article.imgArr"
                    :key="'i'+i">
                 <img :src="'http://localhost:8081'+imgPath"
                      :alt="article.title">
@@ -147,8 +147,8 @@ export default {
     getList (data) {
       api.getProject(data).then(res => {
         this.article = res.data
-        this.article.tags = this.article.tags.split(',')
-        this.article.img = this.article.img.split(',')
+        // this.article.tagsArr = this.article.tagsArr.split(',')
+        // this.article.img = this.article.img.split(',')
       }).catch(err => console.log(err))
     }
   },

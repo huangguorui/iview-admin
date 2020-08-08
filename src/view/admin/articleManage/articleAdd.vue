@@ -5,24 +5,25 @@
           ref="formData"
           :rules="ruleFormData">
       {{file}}
+      {{formData}}
       <FormItem label="文章标题"
                 label-position="top"
                 prop="title">
         <Input v-model="formData.title"
                placeholder="文章标题" />
       </FormItem>
-      <FormItem label="上传图片"
+      <!-- <FormItem label="上传图片"
                 label-position="top"
                 prop="title">
 
         <input type="file"
                @change="getFiles($event)" />
 
-      </FormItem>
+      </FormItem> -->
 
       <Row>
 
-        <Col span="24">
+        <Col span="8">
         <FormItem label="首页图"
                   label-position="top"
                   prop="indexImg">
@@ -36,7 +37,19 @@
         <Col span="8">
         &nbsp;
         </Col>
+        <Col span="8">
+        <FormItem label="选择文章主题"
+                  label-position="top"
+                  prop="themeId">
 
+          <!-- multiple -->
+          <Select v-model="formData.themeId">
+            <Option v-for="item in themes"
+                    :value="item.id"
+                    :key="item.id">{{ item.themeName }}</Option>
+          </Select>
+        </FormItem>
+        </Col>
         <Col span="24">
 
         <FormItem label="详情页图"
@@ -82,17 +95,6 @@
                  placeholder="技术标签" />
         </FormItem>
 
-        <!-- <FormItem label="技术标签"
-                  label-position="top"
-                  prop="tags">
-          <Select v-model="formData.tags"
-                  multiple
-                  style="width:260px">
-            <Option v-for="item in tags"
-                    :value="item.tagName"
-                    :key="item.id">{{ item.tagName }}</Option>
-          </Select>
-        </FormItem> -->
         <p>请选择技术标签：</p>
         <Button v-for="(item,i) in tags"
                 @click="tagSelect(item)"
@@ -129,6 +131,7 @@
 
 import Editor from '_c/editor'
 import apiGetTag from '@/api/tag'
+import apiTheme from '@/api/theme'
 import api from '@/api/article'
 import page from '@/libs/mixins/page'
 import defaultValue from '@/libs/mixins/defaultValue'
@@ -150,9 +153,11 @@ export default {
     return {
       file: [],
       tags: [],
+      themes: [],
       tagsSelect: [],
       formData: {
         tags: '',
+        themeId: '',
         img: null
         // status: 1
       },
@@ -181,6 +186,9 @@ export default {
         img: [
           { required: true, message: '图片列表不可为空', trigger: 'blur' }
         ]
+        // themeId: [
+        //   { required: true, message: '主题不可为空', trigger: 'blur' }
+        // ]
       },
 
       articleType: [{
@@ -195,6 +203,7 @@ export default {
   created () {
     this.getApi(api)
     this.getTag()
+    this.getTheme()
   },
   methods: {
     imgFile (e) {
@@ -271,13 +280,18 @@ export default {
     },
 
     getTag () {
-      console.log(apiGetTag)
+      // console.log(apiGetTag)
       apiGetTag.getListApi({ size: 100 }).then(res => {
         this.tags = res.list
         this.tags.forEach((item, i) => {
           this.tags[i].isTagDisable = false
           this.tags[i].index = i
         })
+      }).catch(err => console.log(err))
+    },
+    getTheme () {
+      apiTheme.getListApi({ size: 100 }).then(res => {
+        this.themes = res.list
       }).catch(err => console.log(err))
     }
   }

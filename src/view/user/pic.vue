@@ -19,7 +19,7 @@
       </template>
     </div>
 
-    <form method="post"
+    <!-- <form method="post"
           enctype="multipart/form-data"
           action="http://localhost:8081/article/pic">
       <p style="margin:10px 0;">上传图片: &nbsp;&nbsp;
@@ -33,7 +33,7 @@
                value="上传" />
 
       </p>
-    </form>
+    </form> -->
 
     <Upload ref="upload"
             :show-upload-list="false"

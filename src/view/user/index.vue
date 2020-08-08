@@ -102,13 +102,13 @@
                     效果：
 
                     <Tag :color="color[i]"
-                         v-for="(item,i) in item.tags"
+                         v-for="(item,i) in item.tagsArr"
                          :key="i"
                          v-if="i<=1"> {{item}}</Tag>
                     <!--
                     <router-link exact
                                  tag="a"
-                                 v-for="(item,i) in item.tags"
+                                 v-for="(item,i) in item.tagsArr"
                                  :key="i"
                                  :to="{path:'/tag/'+item}">
                       <Tag :color="color[i]"
@@ -120,7 +120,7 @@
                        slot="content">
 
                     <router-link tag="a"
-                                 v-for="(item,i) in item.tags"
+                                 v-for="(item,i) in item.tagsArr"
                                  :key="i"
                                  :to="{path:'/tag/'+item}">
                       <Tag :color="color[i]"> {{item}}</Tag>
@@ -250,6 +250,7 @@
 
 import api from '@/api/article'
 import getTag from '@/api/tag'
+import getTheme from '@/api/theme'
 import page from '@/libs/mixins/page'
 import defaultValue from '@/libs/mixins/defaultValue'
 import list from '@/libs/mixins/list'
@@ -336,26 +337,35 @@ export default {
 
   created () {
     this.getApi(api)
+    this.getCreated()
     //     color = color.split('、')
   },
   mounted () {
   },
   methods: {
+    getCreated () {
+      getTag.getListApi({ size: 100 }).then(res => {
+        // 数据处理
+        this.tagList = res.list
+
+        // console.log(this.list)
+      }).catch(err => console.log(err))
+
+      getTheme.getListApi({ size: 100 }).then(res => {
+        // 数据处理
+        this.themeList = res.list
+
+        // console.log(this.list)
+      }).catch(err => console.log(err))
+    },
     getList (data) {
       this.apiList.getListApi(data).then(res => {
         // 数据处理
         this.pageInfo = res.pageInfo
         this.list = res.list
-        this.list.forEach((item, i) => {
-          this.list[i].tags = item.tags.split(',')
-        })
-        // console.log(this.list)
-      }).catch(err => console.log(err))
-
-      getTag.getListApi({ size: 100 }).then(res => {
-        // 数据处理
-        this.tagList = res.list
-
+        // this.list.forEach((item, i) => {
+        //   this.list[i].tagsArr = item.tagsArr.split(',')
+        // })
         // console.log(this.list)
       }).catch(err => console.log(err))
     },
