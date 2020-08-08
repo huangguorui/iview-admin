@@ -94,6 +94,14 @@ export default {
       isFullscreen: false
     }
   },
+
+  created () {
+    // console.log(localStorage.getItem('token'))
+    // console.log(localStorage.getItem('token').length)
+
+    // token未创建
+    this.getRouteStatus()
+  },
   computed: {
     ...mapGetters([
       'errorCount'
@@ -130,6 +138,19 @@ export default {
     ...mapActions([
       'handleLogin'
     ]),
+    getRouteStatus () {
+      if (localStorage.getItem('token') === null) {
+        this.$router.push({
+          name: 'login'
+        })
+      }
+      // 创建后为空的情况
+      if (!localStorage.getItem('token').length) {
+        this.$router.push({
+          name: 'login'
+        })
+      }
+    },
     turnToPage (route) {
       let { name, params, query } = {}
       if (typeof route === 'string') name = route
@@ -176,6 +197,7 @@ export default {
       this.setBreadCrumb(newRoute)
       this.setTagNavList(getNewTagList(this.tagNavList, newRoute))
       this.$refs.sideMenu.updateOpenName(newRoute.name)
+      this.getRouteStatus() // 监控路由
     }
   },
   mounted () {

@@ -1,6 +1,14 @@
 import axios from '@/libs/api.request'
 
 export default {
+  getuListApi (params) {
+    return axios.request({
+      url: '/link/ulist',
+      method: 'get',
+      params: params
+
+    })
+  },
   getListApi (params) {
     return axios.request({
       url: '/link/list',

@@ -202,8 +202,8 @@ export default [{
 
   ]
 }, {
-  path: '/user',
-  name: 'user',
+  path: '/userManage',
+  name: 'userManage',
   meta: {
     icon: 'md-menu',
     title: '用户管理'

@@ -20,9 +20,25 @@ const router = new Router({
 // console.log(homeName)
 // 判断是否需要登录权限 以及是否登录
 router.beforeEach((to, from, next) => {
-  document.title = to.meta.title + ' - 资源网'
-  console.log()
+  // localStorage.setItem('token', '')
+  //   // 没有值跳转到登录页面
+  //   if (!token.length) {
+  //     next({
+  //       path: '/login'
+  //     })
+  //   } else {
+  //     next()
+  //   }
+
   next()
+  document.title = to.meta.title + ' - 资源网'
+
+  if (localStorage.getItem('token') === null) {
+    localStorage.setItem('token', '')
+  }
+
+  // let token = localStorage.getItem('token')
+  // let flag = to.path.indexOf('Manage')
 
   // if (to.matched.some(res => res.meta.requireAuth)) { // 判断是否需要登录权限
   //   // if (localStorage.getItem('username')) { // 判断是否登录

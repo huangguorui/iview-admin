@@ -9,8 +9,32 @@
             title="欢迎登录"
             :bordered="false">
         <div class="form-con">
-          <login-form @on-success-valid="handleSubmit"></login-form>
-          <p class="login-tip">输入任意用户名和密码即可</p>
+          <!-- <login-form @on-success-valid="handleSubmit"></login-form> -->
+          <!-- ref="formData"
+              :rules="ruleFormData" -->
+          <Form :model="formData"
+                ref="formData"
+                :rules="ruleFormData">
+
+            <FormItem label="username"
+                      label-position="top"
+                      prop="username">
+              <Input v-model="formData.username"
+                     placeholder="username" />
+            </FormItem>
+            <FormItem label="password"
+                      label-position="top"
+                      prop="password">
+              <Input v-model="formData.password"
+                     placeholder="password" />
+            </FormItem>
+            <Button type="primary"
+                    @click="handleSubmit">提交</Button>
+            <a href="/"> <Button style="margin-left: 8px">返回首页</Button></a>
+
+          </Form>
+
+          <!-- <p class="login-tip">输入任意用户名和密码即可</p> -->
         </div>
       </Card>
     </div>
@@ -18,21 +42,59 @@
 </template>
 
 <script>
-import LoginForm from '_c/login-form'
+// import LoginForm from '_c/login-form'
 import { mapActions } from 'vuex'
+
+import api from '@/api/login'
+
 export default {
+  data () {
+    return {
+      formData: {
+        username: '',
+        password: ''
+      },
+      ruleFormData: {
+        username: [
+          { required: true, message: '请输入账号', trigger: 'blur' }
+        ],
+        password: [
+          { required: true, message: '请输入密码', trigger: 'blur' }
+        ]
+      }
+    }
+  },
   components: {
-    LoginForm
+    // LoginForm
+  },
+  created () {
+
   },
   methods: {
     ...mapActions([
       'handleLogin',
       'getUserInfo'
     ]),
-    handleSubmit ({ userName, password }) {
-      this.$router.push({
-        name: 'home'
+    handleSubmit () {
+      this.$refs['formData'].validate((valid) => {
+        if (valid) { // { 'username': 'makerhub', 'password': '111111' }
+          api.postLoginApi(this.formData).then(res => {
+            // 登录成功，存token
+            localStorage.setItem('token', res.data.token)
+            console.log(res)
+            console.log(res.data.token)
+            this.$router.push({
+              name: 'home'
+            })
+          }).catch(err => console.log(err))
+        } else {
+          this.$Message.error('请按照提示进行填写')
+        }
       })
+
+      // this.$router.push({
+      //   name: 'home'
+      // })
 
       // this.handleLogin({ userName, password }).then(res => {
       //   this.getUserInfo().then(res => {

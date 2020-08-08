@@ -136,7 +136,12 @@ import getUrl from '@/api/link'
 import defaultValue from '@/libs/mixins/defaultValue'
 export default {
   mixins: [defaultValue],
-
+  created () {
+    // if (localStorage.getItem('token') === null) {
+    //   localStorage.setItem('token', '')
+    //   window.location.reload()
+    // }
+  },
   data () {
     return {
       code: null,
@@ -154,7 +159,7 @@ export default {
         return false
       }
 
-      getUrl.getListApi({ code: this.code }).then(res => {
+      getUrl.getuListApi({ code: this.code }).then(res => {
         // 数据处理
         if (res.list.length === 0) {
           this.$alertInfo.alertInfo(404, '未找到数据，请重新输入')
