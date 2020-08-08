@@ -30,7 +30,7 @@ class HttpRequest {
         //
         'Content-Type': 'application/json',
         'Access-control-Expose-Header': 'Authorization',
-        'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTk2MjkxNTIwLCJleHAiOjE1OTY4OTYzMjB9.NoUaKyXIuBKsEXLWM_NaLHDNP-OophGJfGxXfMAEX3ZRXBg4aupRin-SdEh31OyKP_1aczzx2-fxFNbJJzK7Qw '
+        'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTk2MjkxNTIwLCJleHAiOjE1OTY4OTYzMjB9.NoUaKyXIuBKsEXLWM_NaLHDNP-OophGJfGxXfMAEX3ZRXBg4aupRin-SdEh31OyKP_1aczzx2-fxFNbJJzK7Qw'
 
       }
     }

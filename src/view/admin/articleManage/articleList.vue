@@ -157,6 +157,14 @@ export default {
           key: 'userId'
         },
         {
+          title: '页数',
+          key: 'pages'
+        },
+        {
+          title: '价格',
+          key: 'price'
+        },
+        {
           title: '操作',
           align: 'center',
           type: 'text',

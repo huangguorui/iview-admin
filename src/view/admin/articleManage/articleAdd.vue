@@ -1,11 +1,12 @@
 <template>
   <div>
+    <p>图片上传：</p>
     <pic @imgFile="imgFile"></pic>
     <Form :model="formData"
           ref="formData"
           :rules="ruleFormData">
-      {{file}}
-      {{formData}}
+      <!-- {{file}}
+      {{formData}} -->
       <FormItem label="文章标题"
                 label-position="top"
                 prop="title">
@@ -43,6 +44,7 @@
                   prop="themeId">
 
           <!-- multiple -->
+          {{formData.themeId}}
           <Select v-model="formData.themeId">
             <Option v-for="item in themes"
                     :value="item.id"
@@ -116,13 +118,13 @@
                :rows="4"
                placeholder="文章前言" />
       </FormItem>
-      <FormItem label="文章前言"
+      <FormItem label="正文"
                 label-position="top"
-                prop="description">
+                prop="content">
         <Input type="textarea"
                v-model="formData.content"
                :rows="4"
-               placeholder="文章前言" />
+               placeholder="正文" />
       </FormItem>
       <!-- :value无效 -->
       <Editor v-model="formData.content"
@@ -238,7 +240,7 @@ export default {
               data.isTagDisable = true
               this.tagsSelect.push(data)
               this.$set(this.tags, index, data) // 需要通过 $set才可以赋值
-              this.$set(this.formData.content, 'formData.content', '111111111111111111111')
+              // this.$set(this.formData.content, 'formData.content', '111111111111111111111')
 
               console.log('----')
             }
