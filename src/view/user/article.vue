@@ -19,7 +19,7 @@
             <div class="plate">
               <h1 class="title"> {{article.title}}</h1>
               <!-- <p style="text-align:center">发布时间：{{article.created}}</p> -->
-              {{article.imgArr}}
+              <!-- {{article.imgArr}} -->
               <div class="strong">
                 <p> 购买时请把详细要求和模板编号发给我</p>
                 <p> 作品介绍：可另付费修改，承诺：每份网页记录去向，绝不会有撞车情况！</p>
@@ -36,32 +36,34 @@
                            v-for="(item,i) in article.tagsArr"
                            :key="i"
                            :to="{path:'/tag/'+item}">
-                <Tag :color="color[i]"
+                <Tag :color="color[Math.round(Math.random() * color.length-1)]"
                      size="large"> {{item}}</Tag>
               </router-link>
 
               <p class="strong">前言：</p>
               <p style="text-indent: 2em;">{{article.description}}</p>
 
-              <p class="strong">效果图展示：</p>
-
-              <div v-for="(imgPath,i) in article.imgArr"
-                   :key="'i'+i">
-                <img :src="'http://localhost:8081'+imgPath"
-                     :alt="article.title">
-                <span class=""
-                      style="text-align:center;display:block;padding:20px">第{{i+1}}个页面</span>
-              </div>
-
               <p class="strong">正文：</p>
 
-              <div v-html="article.content">{{article.content}} </div>
+              <div v-html="article.content"
+                   style="text-indent: 2em;">{{article.content}} </div>
               <!-- <div class="hots">当前文章共有6人赞同</div>
  -->
               <!-- <img src="../../assets/images/about.jpg"
                    alt="">
               <img src="../../assets/images/about.jpg"
                    alt=""> -->
+            </div>
+
+            <p class="strong">效果图展示：</p>
+
+            <div v-for="(imgPath,i) in article.imgArr"
+                 :key="'i'+i">
+              <img :src="'http://localhost:8081'+imgPath"
+                   :alt="article.title"
+                   onerror="this.src='http://localhost:8081/uploads/404.jpg'">
+              <span class=""
+                    style="text-align:center;display:block;padding:20px">第{{i+1}}个页面</span>
             </div>
 
             <hr>
@@ -129,6 +131,7 @@ export default {
     console.log(this.$route.params.id)
     this.getList(this.$route.params.id)
   },
+
   data () {
     return {
       article: {
@@ -147,6 +150,8 @@ export default {
     getList (data) {
       api.getProject(data).then(res => {
         this.article = res.data
+        document.title = this.article.title + ' - 资源网'
+
         // this.article.tagsArr = this.article.tagsArr.split(',')
         // this.article.img = this.article.img.split(',')
       }).catch(err => console.log(err))

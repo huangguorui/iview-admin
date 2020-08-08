@@ -47,7 +47,7 @@ export default [{
   path: '/custom',
   name: 'custom',
   meta: {
-    title: '首页',
+    title: '需求定制',
     hideInMenu: true
   },
   component: () => import('@/view/user/custom.vue')

@@ -20,6 +20,8 @@ const router = new Router({
 // console.log(homeName)
 // 判断是否需要登录权限 以及是否登录
 router.beforeEach((to, from, next) => {
+  document.title = to.meta.title + ' - 资源网'
+  console.log()
   next()
 
   // if (to.matched.some(res => res.meta.requireAuth)) { // 判断是否需要登录权限

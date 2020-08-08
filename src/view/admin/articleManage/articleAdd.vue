@@ -85,7 +85,6 @@
                  placeholder="价格" />
         </FormItem>
         </Col>
-
         <Col span="24">
         <FormItem label="技术标签"
                   label-position="top"
@@ -117,9 +116,17 @@
                :rows="4"
                placeholder="文章前言" />
       </FormItem>
-
+      <FormItem label="文章前言"
+                label-position="top"
+                prop="description">
+        <Input type="textarea"
+               v-model="formData.content"
+               :rows="4"
+               placeholder="文章前言" />
+      </FormItem>
       <!-- :value无效 -->
-      <Editor v-model="formData.content"></Editor>
+      <Editor v-model="formData.content"
+              :cache="false"></Editor>
 
       <Button @click="submitData(formData)">提交</Button>
     </Form>
@@ -151,6 +158,7 @@ export default {
   // },
   data () {
     return {
+
       file: [],
       tags: [],
       themes: [],
@@ -204,8 +212,48 @@ export default {
     this.getApi(api)
     this.getTag()
     this.getTheme()
+    if (this.$route.query.id === undefined) {
+      console.log('添加数据')
+    } else {
+      console.log('编辑数据')
+      this.getProject()
+    }
   },
   methods: {
+    getProject () {
+      api.getProject(this.$route.query.id).then(res => {
+        console.log(res.data)
+        this.formData = res.data
+        // res.data.tagsArr.forEach((item, i) => {
+        //   item[i].isTagDisable = false
+        // })
+        // this.tagsSelect = res.data.tagsArr
+
+        res.data.tagsArr.forEach((item) => {
+          this.tags.forEach((row, index) => {
+            console.log(item + ' === ' + row.tagName)
+
+            if (item === row.tagName) {
+              let data = row
+              data.isTagDisable = true
+              this.tagsSelect.push(data)
+              this.$set(this.tags, index, data) // 需要通过 $set才可以赋值
+              this.$set(this.formData.content, 'formData.content', '111111111111111111111')
+
+              console.log('----')
+            }
+          })
+        })
+
+        // 复选框恢复
+        // this.formData.content = '111111111111111111111'
+
+        // this.$set(this.formData.content, 0, '111111111111111111111')
+
+        // this.article.tagsArr = this.article.tagsArr.split(',')
+        // this.article.img = this.article.img.split(',')
+      }).catch(err => console.log(err))
+    },
     imgFile (e) {
       console.log(e)
       this.file = e
@@ -232,21 +280,13 @@ export default {
       this.$refs['formData'].validate((valid) => {
         console.log(e)
         if (valid) {
-          this.isCloseDrawer = false
-          // 添加新的数据，拉取列表
-
-          // let data = {
-          //   blog: this.formData,
-          //   file: this.file
-          // }
-
           this.apiList.postSaveApi(e).then(res => {
             // 数据处理
             console.log(res)
             this.getList(this.pageInfo)
             this.$alertInfo.alertInfo(res.code, res.msg)
             this.$refs['formData'].resetFields() // 清除数据
-
+            this.tags = [] // 选择的数据清空掉
             // 清除缓存
             localStorage.setItem('editorCache', '')
           }).catch(err => console.log(err))

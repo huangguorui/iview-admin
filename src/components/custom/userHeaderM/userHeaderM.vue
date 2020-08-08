@@ -8,13 +8,13 @@
                   data-toggle="collapse"
                   data-target="#bs-example-navbar-collapse-1"
                   aria-expanded="false">
-            <span class="sr-only">大学生作业网</span>
+            <span class="sr-only">资源网</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand"
-             href="/">大学生作业网</a>
+             href="/">资源网</a>
         </div>
 
         <div class="collapse navbar-collapse"

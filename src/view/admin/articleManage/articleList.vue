@@ -160,6 +160,7 @@ export default {
           title: '操作',
           align: 'center',
           type: 'text',
+          width: 260,
           render: (h, params) => {
             return h('div', [
               h('Button', {
@@ -183,7 +184,31 @@ export default {
                     console.log(params.row)
                   }
                 }
-              }, '编辑'),
+              }, '简洁编辑'),
+              h('Button', {
+                props: {
+                  type: 'primary',
+                  size: 'small'
+                },
+                style: {
+                  marginRight: '5px'
+                },
+                // props: {
+                //   size: 'small'
+                // },
+                on: {
+                  click: () => {
+                    // this.isCloseDrawer = true
+                    // this.titleDrawer = '编辑资源'
+
+                    // // 防止表格中的数据随着修改而发生改变
+                    // this.formData = Object.assign({}, params.row)  params:data
+                    this.$router.push({ path: 'articleAdd', query: { id: params.row.id } })
+
+                    console.log(params.row)
+                  }
+                }
+              }, '复杂编辑'),
               h('Button', {
                 props: {
                   type: 'error',

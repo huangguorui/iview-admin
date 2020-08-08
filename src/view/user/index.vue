@@ -78,6 +78,7 @@
               <img :src="item.indexImg==null?'http://localhost:8081/uploads/404.jpg':'http://localhost:8081'+item.indexImg"
                    :alt="item.title"
                    :title="item.title"
+                   onerror="this.src='http://localhost:8081/uploads/404.jpg'"
                    @error="nofindImg">
               <div class="caption">
                 <p class="truncate-text"
@@ -101,7 +102,7 @@
                   <p class="truncate-text">
                     效果：
 
-                    <Tag :color="color[i]"
+                    <Tag :color="color[Math.round(Math.random() * color.length-1)]"
                          v-for="(item,i) in item.tagsArr"
                          :key="i"
                          v-if="i<=1"> {{item}}</Tag>
@@ -123,7 +124,7 @@
                                  v-for="(item,i) in item.tagsArr"
                                  :key="i"
                                  :to="{path:'/tag/'+item}">
-                      <Tag :color="color[i]"> {{item}}</Tag>
+                      <Tag :color="color[Math.round(Math.random() * color.length-1)]"> {{item}}</Tag>
                     </router-link>
 
                   </div>
@@ -141,6 +142,7 @@
                                tag="a"
                                class="btn btn-default"
                                role="button"
+                               target="_blank"
                                style="margin-left:10px"
                                :to="{path:'/project/id/'+item.id}">查看详情
                   </router-link>
