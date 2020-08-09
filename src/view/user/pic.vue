@@ -40,13 +40,13 @@
             :default-file-list="defaultList"
             :on-success="handleSuccess"
             :format="['jpg','jpeg','png']"
-            :max-size="2048"
+            :max-size="20480"
             :on-format-error="handleFormatError"
             :on-exceeded-size="handleMaxSize"
             :before-upload="handleBeforeUpload"
             multiple
             type="drag"
-            action="http://localhost:8081/article/pic"
+            :action="getUrlIp+'article/pic'"
             style="display: inline-block;width:58px;">
       <div style="width: 58px;height:58px;line-height: 58px;">
         <Icon type="ios-camera"
@@ -58,14 +58,17 @@
 
     <Modal title="View Image"
            v-model="visible">
-      <img :src="'http://localhost:8081/uploads/' + imgName "
+      <img :src="getUrlIp+'/uploads/' + imgName "
            v-if="visible"
            style="width: 100%">
     </Modal>
   </div>
 </template>
 <script>
+import defaultValue from '@/libs/mixins/defaultValue'
+
 export default {
+  mixins: [defaultValue],
   data () {
     return {
       defaultList: [

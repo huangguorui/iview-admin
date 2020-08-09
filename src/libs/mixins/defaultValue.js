@@ -17,7 +17,8 @@ export default {
       isBtnDisable: true, // 按钮状态
       list: [], // 获取的数据列表
       formData: {}, // 提交的数据
-      search: { // 搜索
+      getUrlIp: 'http://49.234.91.147:8081/', // 实际开发请求地址
+      query: { // 查询
 
       }
 

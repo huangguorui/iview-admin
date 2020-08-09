@@ -65,10 +65,13 @@
                 <div class="input-group">
                   <input type="text"
                          class="form-control"
+                         v-model.trim="title"
+                         @input="selectTitle"
                          placeholder="标题查找">
                   <span class="input-group-btn">
                     <button class="btn btn-default"
-                            type="button">查找</button>
+                            type="button"
+                            @input="selectTitle">查找</button>
                   </span>
                 </div><!-- /input-group -->
               </div>
@@ -145,6 +148,7 @@ export default {
   data () {
     return {
       code: null,
+      title: '',
       urlCode: {
         url: '',
         code: '',
@@ -153,6 +157,9 @@ export default {
     }
   },
   methods: {
+    selectTitle () {
+      this.$emit('selectTitle', this.title)
+    },
     getUrl () {
       if (this.code == null) {
         this.$alertInfo.alertInfo(404, '未输入提取码')

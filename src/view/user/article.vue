@@ -59,9 +59,9 @@
 
             <div v-for="(imgPath,i) in article.imgArr"
                  :key="'i'+i">
-              <img :src="'http://localhost:8081'+imgPath"
+              <img :src="getUrlIp+imgPath"
                    :alt="article.title"
-                   onerror="this.src='http://localhost:8081/uploads/404.jpg'">
+                   @error="nofindImg">
               <span class=""
                     style="text-align:center;display:block;padding:20px">第{{i+1}}个页面</span>
             </div>
@@ -147,6 +147,16 @@ export default {
   },
 
   methods: {
+    nofindImg (index) {
+      // console.log(index)
+      let img = event.srcElement
+
+      // img.src = '../../assets/images/about.jpg'
+
+      img.src = this.getUrlIp + '/uploads/404.jpg'
+
+      img.onerror = null // 防止一直跳动
+    },
     getList (data) {
       api.getProject(data).then(res => {
         this.article = res.data

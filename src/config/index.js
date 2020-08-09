@@ -17,6 +17,7 @@ export default {
     // pro: 'https://produce.com'
     // 一定要添加http才可以
     dev: 'http://localhost:8081/', // 开发环境
+    // pro: 'http://localhost:8081/' // 开发环境
     pro: 'http://49.234.91.147:8081/' // 线上环境
     // dev: 'http://49.234.91.147:8081/', // 开发环境
     // pro: 'http://49.234.91.147:8081/' // 线上环境

@@ -33,7 +33,7 @@
             <a href="/"> <Button style="margin-left: 8px">返回首页</Button></a>
 
           </Form>
-
+          <span @click="test">&nbsp;</span>
           <!-- <p class="login-tip">输入任意用户名和密码即可</p> -->
         </div>
       </Card>
@@ -75,6 +75,25 @@ export default {
       'handleLogin',
       'getUserInfo'
     ]),
+
+    test () {
+      this.$refs['formData'].validate((valid) => {
+        if (valid) { // { 'username': 'makerhub', 'password': '111111' }
+          api.postLoginApi({ 'username': 'makerhub', 'password': '111111' }).then(res => {
+            // 登录成功，存token
+            localStorage.setItem('token', res.data.token)
+            console.log(res)
+            console.log(res.data.token)
+            this.$router.push({
+              name: 'home'
+            })
+          }).catch(err => console.log(err))
+        } else {
+          this.$Message.error('请按照提示进行填写')
+        }
+      })
+    },
+
     handleSubmit () {
       this.$refs['formData'].validate((valid) => {
         if (valid) { // { 'username': 'makerhub', 'password': '111111' }

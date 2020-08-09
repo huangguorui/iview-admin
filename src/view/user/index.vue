@@ -24,14 +24,14 @@
 <template>
   <div>
     <div class="main">
-      <user-header-m></user-header-m>
+      <user-header-m @selectTitle="selectTitle"></user-header-m>
 
       <div class="container  mt50px">
         <div class="search_top">
           <div>网页主题：
             <!-- themeList -->
 
-            <Tag :color="color[Math.round(Math.random() * color.length-1)]"
+            <Tag :color="color[i]"
                  v-for="(item,i) in themeList"
                  :key="i"
                  size="large"
@@ -40,7 +40,7 @@
           </div>
 
           <div>网页页数：
-            <Tag :color="color[Math.round(Math.random() * color.length-1)]"
+            <Tag :color="color[i]"
                  v-for="(item,i) in pageList"
                  :key="i"
                  size="large"
@@ -54,11 +54,11 @@
                          :key="i"
                          style="padding:5px"
                          :to="{path:'/tag/'+item.tagName}">
-              <Tag :color="color[Math.round(Math.random() * color.length-1)]"
+              <Tag :color="color[i]"
                    size="large"
                    style="margin-right:5px;"> {{item.tagName}}</Tag>
             </router-link> -->
-            <Tag :color="color[Math.round(Math.random() * color.length-1)]"
+            <Tag :color="color[i]"
                  v-for="(item,i) in tagList"
                  :key="i"
                  size="large"
@@ -75,11 +75,13 @@
                          tag="a"
                          :to="{path:'/project/id/'+item.id}"> -->
             <div class="thumbnail hf">
-              <img :src="item.indexImg==null?'http://localhost:8081/uploads/404.jpg':'http://localhost:8081'+item.indexImg"
+              <img :src="item.indexImg==null?getUrlIp+'/uploads/404.jpg':getUrlIp+item.indexImg"
                    :alt="item.title"
                    :title="item.title"
-                   onerror="this.src='http://localhost:8081/uploads/404.jpg'"
                    @error="nofindImg">
+              <!-- :src="item.indexImg==null?getUrlIp+'/uploads/404.jpg':getUrlIp+item.indexImg" -->
+              <!-- onerror="this.src=getUrlIp+'/uploads/404.jpg'" -->
+
               <div class="caption">
                 <p class="truncate-text"
                    style="font-size:16px">名称：{{item.title}}</p>
@@ -159,28 +161,7 @@
       <page-m :page-data="pageInfo"
               @pageChange="pageChange"
               @pagSizesChange="pageSizeChange"></page-m>
-      <!-- <nav aria-label="Page navigation"
-           style="text-align: center;">
-        <ul class="pagination">
-          <li>
-            <a href=article
-               aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-          <li><a href=article>1</a></li>
-          <li><a href=article>2</a></li>
-          <li><a href=article>3</a></li>
-          <li><a href=article>4</a></li>
-          <li><a href=article>5</a></li>
-          <li>
-            <a href=article
-               aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        </ul>
-      </nav> -->
+
       <user-footer-m></user-footer-m>
 
       <Modal v-model="isModal"
@@ -189,7 +170,11 @@
              title="请选择支付方式"
              :loading="loading"
              @on-ok="asyncOK">
-        <p class="">您当前选择的文件<strong class="strong">ID</strong>为：<strong class="strong">{{orderId}}</strong>，请凭此<strong class="strong">ID</strong>联系客服，付款后索取提取码。</p>
+        <p class="">
+          您当前选择的文件
+          <strong class="strong">ID</strong>为：
+          <strong class="strong">{{orderId}}</strong>，
+          请凭此<strong class="strong">ID</strong>联系客服，付款后索取提取码。</p>
 
         <Row class="open">
           <Col span="6"> <img style="width:100%;display:block"
@@ -345,6 +330,12 @@ export default {
   mounted () {
   },
   methods: {
+    selectTitle (e) {
+      console.log(e)
+      this.query.title = e
+      let data = Object.assign(this.query, this.pageInfo)
+      this.getList(data)
+    },
     getCreated () {
       getTag.getListApi({ size: 100 }).then(res => {
         // 数据处理
@@ -382,11 +373,13 @@ export default {
     },
     nofindImg (index) {
       // console.log(index)
-      // let img = event.srcElement
+      let img = event.srcElement
 
       // img.src = '../../assets/images/about.jpg'
 
-      // img.onerror = null // 防止一直跳动
+      img.src = this.getUrlIp + '/uploads/404.jpg'
+
+      img.onerror = null // 防止一直跳动
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- @on-close="colseDrawer :closable="false"" :value防止报错 ，@on-close监听右上角 -->
+    <!-- @on-close="colseDrawer :closable="false" :value防止报错 ，@on-close监听右上角 -->
     <Drawer :value="isCloseDrawer"
             width="390"
             @on-close="colseDrawer"
@@ -30,12 +30,12 @@ export default {
     },
     titleDrawer: {
       type: String,
-      default: "默认标题"
+      default: '默认标题'
     },
     isCloseDrawer: {
       type: Boolean,
       default: false
-    },
+    }
   },
 
   methods: {
@@ -46,7 +46,6 @@ export default {
     colseDrawer () {
       this.$emit('closeDrawer')
 
-
       //       [Vue warn]: Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop's value. Prop being mutated: "isCloseDrawer"
 
       // found in
@@ -56,8 +55,7 @@ export default {
       //          <App> at src/App.vue
       //            <Root>
       // this.isCloseDrawer = false
-      //不能在组件内部修改传入的porps的值，我们返回到父组件进行处理
-
+      // 不能在组件内部修改传入的porps的值，我们返回到父组件进行处理
     }
   },
   data () {
@@ -67,11 +65,11 @@ export default {
         overflow: 'auto',
         paddingBottom: '53px',
         position: 'static'
-      },
+      }
       //   formData: {
       //     position: 'static'
       //   }
-      //该变量使用了props就不能在使用它定义为变量了
+      // 该变量使用了props就不能在使用它定义为变量了
       //     vue.runtime.esm.js?0261:619 [Vue warn]: The data property "formData" is already declared as a prop. Use prop default value instead.
 
       // found in

@@ -87,7 +87,9 @@ export default {
     },
     // 搜索数据
     searchData () {
-      this.getList(this.pageInfo)
+      // 将两个对象合并到一起
+      let query = Object.assign(this.query, this.pageInfo)
+      this.getList(query)
       console.log(this.pageInfo)
     },
     // 关闭组件侧拉框
