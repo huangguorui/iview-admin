@@ -2,6 +2,8 @@
  *
  * @author h
  */
+import config from '@/config'
+const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.pro
 export default {
   name: 'defaultValue',
   data () {
@@ -17,7 +19,9 @@ export default {
       isBtnDisable: true, // 按钮状态
       list: [], // 获取的数据列表
       formData: {}, // 提交的数据
-      getUrlIp: 'http://49.234.91.147:8081/', // 实际开发请求地址
+      // getUrlIp: 'http://49.234.91.147:9999/', // 实际开发请求地址
+      getUrlIp: baseUrl, // 实际开发请求地址
+
       query: { // 查询
 
       }

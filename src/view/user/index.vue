@@ -90,7 +90,7 @@
                 </p>
                 <!-- <p>我的博客</p> -->
                 <p>
-                  价格： <Tag size="medium">{{item.price}} 元</Tag>
+                  价格： <Tag size="medium">{{item.price}}{{item.price=='免费'?'':' 元'}}</Tag>
                 </p>
                 <p>
                   页数： <Tag size="medium">{{item.pages}} 页</Tag>

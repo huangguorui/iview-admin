@@ -1,5 +1,22 @@
 <style lang="less" scoped>
 </style>
+<style scoped>
+.top,
+.bottom {
+  text-align: center;
+}
+.center {
+  width: 300px;
+  margin: 10px auto;
+  overflow: hidden;
+}
+.center-left {
+  float: left;
+}
+.center-right {
+  float: right;
+}
+</style>
 <template>
   <div>
     <div class="btn">
@@ -90,12 +107,6 @@
                    placeholder="需求概述：请告知我们产品的使用品台、功能需求、数量等"></Input>
           </FormItem>
 
-          <FormItem>
-            <Button type="primary"
-                    @click="submitData(formData)">提交</Button>
-            <Button @click="handleReset('formData')"
-                    style="margin-left: 8px">取消</Button>
-          </FormItem>
         </Form>
       </template>
 
@@ -111,6 +122,18 @@
             @pageChange="pageChange"
             :isSize="true"
             @pageSizeChange="pageSizeChange"></page-m>
+
+    <Modal v-model="isInfo"
+           title="项目描述详情"
+           @on-ok="ok"
+           @on-cancel="cancel">
+      <p>项目描述详情：</p>
+      <Input v-model="infoData.peopleDescribe"
+             type="textarea"
+             :disabled="true"
+             :autosize="{minRows: 5,maxRows: 20}"
+             placeholder=""></Input>
+    </Modal>
 
   </div>
 </template>
@@ -169,15 +192,21 @@ export default {
         },
         {
           title: 'ID',
-          key: 'id'
+          key: 'id',
+          width: 50
         },
         {
-          title: '发送人Ip',
-          key: 'ip'
+          title: '创建时间',
+          key: 'created'
+        },
+        {
+          title: '项目类型',
+          key: 'porjectType'
         },
         {
           title: '联系人姓名',
           key: 'peopleName'
+
         },
         {
           title: '联系人电话',
@@ -189,19 +218,42 @@ export default {
         },
         {
           title: '项目描述',
-          key: 'peopleDescribe'
+          key: 'peopleDescribe',
+          width: 200,
+          render: (h, params) => {
+            return h('div', [
+
+              h('div', {
+                props: {
+                },
+                style: {
+                  overflow: 'hidden',
+                  whiteSpace: 'nowrap',
+                  textOverflow: 'ellipsis',
+                  cursor: 'pointer',
+                  width: 200
+                },
+                attrs: { title: '单击查看详情' },
+                on: {
+                  click: () => {
+                    this.isInfo = true
+                    this.infoData = params.row
+                    console.log(params.row)
+                  }
+                }
+              }, params.row.peopleDescribe)
+            ])
+          }
         },
         {
           title: '当前状态',
           key: 'status'
+
         },
+
         {
-          title: '项目类型',
-          key: 'porjectType'
-        },
-        {
-          title: '创建时间',
-          key: 'created'
+          title: '发送人Ip',
+          key: 'ip'
         },
         {
           title: '操作',
@@ -273,7 +325,9 @@ export default {
       title: {
         addTitle: '添加',
         editTitle: '编辑定制'
-      }
+      },
+      isInfo: false,
+      infoData: {}
 
     }
   },
@@ -281,7 +335,12 @@ export default {
     this.getApi(api)
   },
   methods: {
-
+    cancel () {
+      this.isInfo = false
+    },
+    ok () {
+      this.isInfo = false
+    }
   }
 
 }

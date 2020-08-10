@@ -32,13 +32,18 @@
                 {{item}}
               </tag> -->
 
-              <router-link tag="a"
+              <Tag v-for="(item,i) in article.tagsArr"
+                   :key="i"
+                   :color="color[Math.round(Math.random() * color.length-1)]"
+                   size="large"> {{item}}</Tag>
+
+              <!-- <router-link tag="a"
                            v-for="(item,i) in article.tagsArr"
                            :key="i"
                            :to="{path:'/tag/'+item}">
                 <Tag :color="color[Math.round(Math.random() * color.length-1)]"
                      size="large"> {{item}}</Tag>
-              </router-link>
+              </router-link> -->
 
               <p class="strong">前言：</p>
               <p style="text-indent: 2em;">{{article.description}}</p>
@@ -106,8 +111,8 @@
         </div>
         <nav aria-label="...">
           <ul class="pager">
-            <li class="previous"><a href=article.html><span aria-hidden="true">&larr;</span> 上一篇作业：我的个人博客制作</a></li>
-            <li class="next"><a href=article.html>下一篇作业：我的个人博客制作 <span aria-hidden="true">&rarr;</span></a></li>
+            <!-- <li class="previous"><a href=article.html><span aria-hidden="true">&larr;</span> 上一篇作业：我的个人博客制作</a></li>
+            <li class="next"><a href=article.html>下一篇作业：我的个人博客制作 <span aria-hidden="true">&rarr;</span></a></li> -->
           </ul>
         </nav>
       </div>
@@ -160,7 +165,7 @@ export default {
     getList (data) {
       api.getProject(data).then(res => {
         this.article = res.data
-        document.title = this.article.title + ' - 资源网'
+        document.title = this.article.title + ' - 学习网'
 
         // this.article.tagsArr = this.article.tagsArr.split(',')
         // this.article.img = this.article.img.split(',')

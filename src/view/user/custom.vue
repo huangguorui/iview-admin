@@ -57,11 +57,13 @@
             </Col>
 
           </Row>
+          <!-- {{formData.peopleDescribe.length}} -->
 
-          <FormItem label="需求概述"
+          <FormItem :label="'需求概述:'+'最多可输入10000字，当前已输入【'+formData.peopleDescribe.length+'】'"
                     prop="peopleDescribe">
             <Input v-model="formData.peopleDescribe"
                    type="textarea"
+                   :maxlength="10000"
                    :autosize="{minRows: 5,maxRows: 20}"
                    placeholder="需求概述：请告知我们产品的使用品台、功能需求、数量等"></Input>
           </FormItem>
@@ -123,6 +125,10 @@ export default {
         type: 'Wap'
       }, {
         type: '小程序'
+      }, {
+        type: 'Html页面'
+      }, {
+        type: '小型系统'
       }, {
         type: '大型系统'
       }, {

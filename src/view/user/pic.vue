@@ -21,7 +21,7 @@
 
     <!-- <form method="post"
           enctype="multipart/form-data"
-          action="http://localhost:8081/article/pic">
+          action="http://localhost:9999/article/pic">
       <p style="margin:10px 0;">上传图片: &nbsp;&nbsp;
         <input type="file"
                name="file"
@@ -40,7 +40,8 @@
             :default-file-list="defaultList"
             :on-success="handleSuccess"
             :format="['jpg','jpeg','png']"
-            :max-size="20480"
+            :max-size="204800"
+            :headers="headers"
             :on-format-error="handleFormatError"
             :on-exceeded-size="handleMaxSize"
             :before-upload="handleBeforeUpload"
@@ -53,7 +54,7 @@
               size="20"></Icon>
       </div>
     </Upload>
-    <!-- <img src="http://localhost:8081/uploads/about.jpg"
+    <!-- <img src="http://localhost:9999/uploads/about.jpg"
          alt="..."> -->
 
     <Modal title="View Image"
@@ -74,7 +75,7 @@ export default {
       defaultList: [
         // {
         //   'name': 'logo.jpg',
-        //   'url': 'http://192.168.25.1:8081/uploads/logo.jpg'
+        //   'url': 'http://192.168.25.1:9999/uploads/logo.jpg'
         // }
         // {
         //   'name': 'bc7521e033abdd1e92222d733590f104',
@@ -84,7 +85,14 @@ export default {
       imgName: '',
       visible: false,
       uploadList: [],
-      imgFileList: []
+      imgFileList: [],
+      headers: {
+        //
+        // 'Content-Type': 'application/json',
+        'Access-control-Expose-Header': 'Authorization',
+        // 'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTk2MjkxNTIwLCJleHAiOjE1OTY4OTYzMjB9.NoUaKyXIuBKsEXLWM_NaLHDNP-OophGJfGxXfMAEX3ZRXBg4aupRin-SdEh31OyKP_1aczzx2-fxFNbJJzK7Qw '
+        'Authorization': localStorage.getItem('token')
+      }
     }
   },
   methods: {
@@ -120,7 +128,7 @@ export default {
       console.log(this.defaultList)
       console.log(res)
 
-      // file.url = 'http://192.168.25.1:8081/uploads/logo.jpg'
+      // file.url = 'http://192.168.25.1:9999/uploads/logo.jpg'
       // file.name = 'logo.jpg'
     },
     handleFormatError (file) {

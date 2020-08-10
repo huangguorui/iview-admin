@@ -31,7 +31,7 @@ router.beforeEach((to, from, next) => {
   //   }
 
   next()
-  document.title = to.meta.title + ' - 资源网'
+  document.title = to.meta.title + ' - 学习网'
 
   if (localStorage.getItem('token') === null) {
     localStorage.setItem('token', '')
