@@ -16,7 +16,7 @@ export default {
     // dev: 'https://www.easy-mock.com/mock/5add9213ce4d0e69998a6f51/iview-admin/',
     // pro: 'https://produce.com'
     // 一定要添加http才可以
-    dev: 'http://localhost:9999/', // 开发环境
+    dev: 'http://49.234.91.147:9999/', // 开发环境
     // pro: 'http://localhost:9999/' // 开发环境
     pro: 'http://49.234.91.147:9999/' // 线上环境
     // dev: 'http://49.234.91.147:9999/', // 开发环境

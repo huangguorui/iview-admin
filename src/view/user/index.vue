@@ -25,45 +25,59 @@
   <div>
     <div class="main">
       <user-header-m @selectTitle="selectTitle"></user-header-m>
-
       <div class="container  mt50px">
         <div class="search_top">
-          <div>网页主题：
-            <!-- themeList -->
 
-            <Tag :color="color[i]"
+          <!-- themeList -->
+          <div>
+            搜索内容为：
+            <span class="current"
+                  v-for='(item,key) in choose'
+                  :key="key">
+              <Tag closable
+                   v-if="item.tagName"
+                   color="primary"
+                   style="margin-right:5px;"
+                   @on-close="removeHandle(key)"> {{item.tagName}}</Tag>
+              <Tag closable
+                   v-if="item.pageName"
+                   color="primary"
+                   style="margin-right:5px;"
+                   @on-close="removeHandle(key)"> {{item.pageName}}</Tag>
+              <Tag closable
+                   v-if="item.themeName"
+                   color="primary"
+                   style="margin-right:5px;"
+                   @on-close="removeHandle(key)"> {{item.themeName}}</Tag>
+
+            </span>
+            <div v-for='(item,index) in searchList'
+                 :key="index">
+              {{item.title}}
+              <span v-for="(option,i) in item.list"
+                    :key="i"
+                    @click="addChooseHandle(option,index,i)">
+                <Button v-if="index==0"
+                        :type="item.index === i?'primary':'default'"
+                        size="small"> {{option.themeName}}</Button>
+                <Button v-if="index==1"
+                        :type="item.index === i?'primary':'default'"
+                        size="small"> {{option.pageName}}</Button>
+                <Button v-if="index==2"
+                        :type="item.index === i?'primary':'default'"
+                        size="small"> {{option.tagName}}</Button>
+
+              </span>
+            </div>
+          </div>
+          <!-- <Tag color="default"
                  v-for="(item,i) in themeList"
                  :key="i"
                  size="large"
-                 style="margin-right:5px;"> {{item.themeName}}</Tag>
-
-          </div>
-
-          <div>网页页数：
-            <Tag :color="color[i]"
-                 v-for="(item,i) in pageList"
-                 :key="i"
-                 size="large"
-                 style="margin-right:5px;"> {{item.pageName}}页</Tag>
-
-          </div>
-          <div>使用技术：
-            <!-- <router-link exact
-                         tag="a"
-                         v-for="(item,i) in tagList"
-                         :key="i"
-                         style="padding:5px"
-                         :to="{path:'/tag/'+item.tagName}">
-              <Tag :color="color[i]"
-                   size="large"
-                   style="margin-right:5px;"> {{item.tagName}}</Tag>
-            </router-link> -->
-            <Tag :color="color[i]"
-                 v-for="(item,i) in tagList"
-                 :key="i"
-                 size="large"
-                 style="margin-right:5px;"> {{item.tagName}}</Tag>
-          </div>
+                 style="margin-right:5px;"> {{item.themeName}}</Tag> -->
+          <!-- <Button size="small"
+                  v-for="(item,i) in themeList"
+                  :key="i"> {{item.themeName}}</Button> -->
 
         </div>
 
@@ -204,43 +218,21 @@
 
       </Modal>
     </div>
-    <!-- <Row>
-      <ul>
-        <li v-for="item in list"
-            :key="item.id">
-          <div class="text">
-            <a href="javascript:;">
-              <router-link exact
-                           tag="h2"
-                           :to="{path:'/project/id/'+item.id}">
-                ID: {{item.id}}------ {{item.title}}</router-link>
-            </a>
-            {{item.content}}
-          </div>
-        </li>
-      </ul>
-    </Row>
-    <page-m :page-data="pageInfo"
-            @pageChange="pageChange"
-            @pagSizesChange="pageSizeChange"></page-m> -->
-    <!-- <img src="../../assets/images/login-bg.jpg"> -->
+  </div>
 
-    <!-- <a href="/project">跳转</a>
-    <a href="/custom">私人定制</a>
-    {{pageInfo}} -->
   </div>
 </template>
 
 <script>
 
 // import $ from 'jquery'
-
 import api from '@/api/article'
 import getTag from '@/api/tag'
 import getTheme from '@/api/theme'
 import page from '@/libs/mixins/page'
 import defaultValue from '@/libs/mixins/defaultValue'
 import list from '@/libs/mixins/list'
+
 export default {
   mixins: [defaultValue, list, page],
   components: {
@@ -248,39 +240,20 @@ export default {
   },
   data () {
     return {
+
       themeList: [
+
+      ],
+      searchList: [
         {
-          themeName: '人物博客'
-        },
-        {
-          themeName: '学校网页'
-        },
-        {
-          themeName: '新闻时政'
-        },
-        {
-          themeName: '电影音乐'
-        },
-        {
-          themeName: '体育运动'
-        },
-        {
-          themeName: '旅游美食'
-        },
-        {
-          themeName: '购物电商'
-        },
-        {
-          themeName: '汽车军事'
-        },
-        {
-          themeName: '文化环保'
-        },
-        {
-          themeName: '公司企业'
-        },
-        {
-          themeName: '其他成品'
+          title: '网页主题：',
+          list: this.themeList
+        }, {
+          title: '网页页数：',
+          list: this.pageList
+        }, {
+          title: '使用技术：',
+          list: this.tagList
         }
       ],
 
@@ -318,7 +291,9 @@ export default {
       ],
       isModal: false,
       loading: true,
-      pageInfo: {}
+      choose: {
+
+      }
     }
   },
 
@@ -330,6 +305,29 @@ export default {
   mounted () {
   },
   methods: {
+    searchVal (e) {
+      console.log(e)
+    },
+    addChooseHandle (option, index, i) {
+      // 使用set添加对象
+      this.$set(this.choose, index, option)
+      console.log(this.choose)
+      // 找到操作的一行，把这一行的数据中的index，设置为
+      this.searchList[index].index = i
+
+      // 添加就会搜索
+      // let data = {
+      //   pages: this.choose.page,
+      //   tag: this.choose.tagName,
+      //   theme: this.choose.themeName
+      // }
+      // console.log(data)
+    },
+    removeHandle (key) {
+      console.log(key)
+      this.$delete(this.choose, key)
+      this.searchList[key].index = -1
+    },
     selectTitle (e) {
       console.log(e)
       this.query.title = e
@@ -337,19 +335,30 @@ export default {
       this.getList(data)
     },
     getCreated () {
+      this.searchList[1].list = this.pageList
+
       getTag.getListApi({ size: 100 }).then(res => {
         // 数据处理
-        this.tagList = res.list
 
-        // console.log(this.list)
+        this.searchList[2].list = res.list
       }).catch(err => console.log(err))
 
       getTheme.getListApi({ size: 100 }).then(res => {
         // 数据处理
-        this.themeList = res.list
 
+        this.searchList[0].list = res.list
         // console.log(this.list)
       }).catch(err => console.log(err))
+
+      this.serialize()
+    },
+    // 循环遍历给搜索条件增加-1
+    serialize () {
+      this.searchList.forEach((item, index) => {
+        this.searchList[index].list.forEach((row, i) => {
+          this.searchList[index].list[i].index = -1
+        })
+      })
     },
     getList (data) {
       this.apiList.getListApi(data).then(res => {

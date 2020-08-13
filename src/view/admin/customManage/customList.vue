@@ -34,7 +34,8 @@
 
       <Button type="primary"
               @click="searchData">搜索</Button>
-
+      <Button type="primary"
+              @click="exportData ">下载Excel文件</Button>
     </div>
     <Table border
            @on-selection-change="parkCheck"
@@ -188,6 +189,7 @@ export default {
         {
           type: 'selection',
           width: 60,
+
           align: 'center'
         },
         {
@@ -335,6 +337,24 @@ export default {
     this.getApi(api)
   },
   methods: {
+    exportData () {
+      let data = []
+
+      // setInterval(() => {
+      this.apiList.getListApi({ size: this.pageInfo.total }).then(res => {
+        // 数据处理
+        data = res.list
+        console.log(data)
+        console.log('size: ' + this.pageInfo.total)
+        // selection 要和表的ref一致
+        this.$refs.selection.exportCsv({
+          filename: '定制需求列表',
+          columns: this.rowTitle,
+          data: data
+        })
+      }).catch(err => console.log(err))
+      // }, 3000)
+    },
     cancel () {
       this.isInfo = false
     },
