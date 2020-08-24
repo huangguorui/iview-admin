@@ -1,5 +1,8 @@
 import axios from 'axios'
 import store from '@/store'
+import {
+  Message
+} from 'iview'
 // import { Spin } from 'iview'
 const addErrorLog = errorInfo => {
   const {
@@ -82,6 +85,11 @@ class HttpRequest {
       return response
     }, error => {
       this.destroy(url)
+      // if()
+      Message.error(error.response.data.message)
+      localStorage.setItem('token', '')
+      // console.log(error.response.data.message)
+      // status
       addErrorLog(error.response)
       return Promise.reject(error)
     })

@@ -357,7 +357,6 @@ export default {
 
       getTag.getListApi({ size: 100 }).then(res => {
         // 数据处理
-
         this.searchList[2].list = res.list
       }).catch(err => console.log(err))
 
