@@ -30,29 +30,31 @@
 
           <!-- themeList -->
           <div>
-            搜索内容为：
-            <span class="current"
-                  v-for='(item,key) in choose'
-                  :key="key">
-              <Tag closable
-                   v-if="item.tagName"
-                   color="primary"
-                   style="margin-right:5px;"
-                   @on-close="removeHandle(key)"> {{item.tagName}}</Tag>
-              <Tag closable
-                   v-if="item.pageName"
-                   color="primary"
-                   style="margin-right:5px;"
-                   @on-close="removeHandle(key)"> {{item.pageName}}</Tag>
-              <Tag closable
-                   v-if="item.themeName"
-                   color="primary"
-                   style="margin-right:5px;"
-                   @on-close="removeHandle(key)"> {{item.themeName}}</Tag>
+            <div>
+              搜索内容为：
+              <span v-for='(item,key) in choose'
+                    :key="key">
+                <Tag closable
+                     v-if="item.tagName"
+                     color="primary"
+                     style="margin-right:5px;"
+                     @on-close="removeHandle(key)"> {{item.tagName}}</Tag>
+                <Tag closable
+                     v-if="item.pageName"
+                     color="primary"
+                     style="margin-right:5px;"
+                     @on-close="removeHandle(key)"> {{item.pageName}}</Tag>
+                <Tag closable
+                     v-if="item.themeName"
+                     color="primary"
+                     style="margin-right:5px;"
+                     @on-close="removeHandle(key)"> {{item.themeName}}</Tag>
 
-            </span>
+              </span>
+            </div>
+
             <div v-for='(item,index) in searchList'
-                 :key="index">
+                 :key="index+5">
               {{item.title}}
               <span v-for="(option,i) in item.list"
                     :key="i"
@@ -89,7 +91,7 @@
                          tag="a"
                          :to="{path:'/project/id/'+item.id}"> -->
             <div class="thumbnail hf">
-              <img :src="item.indexImg==null?getUrlIp+'/uploads/404.jpg':getUrlIp+item.indexImg"
+              <img :src="item.indexImg==null?getUrlIp+'/uploads/404.jpg':'http://i.huanggr.cn/static/'+item.indexImg"
                    :alt="item.title"
                    :title="item.title"
                    @error="nofindImg">
@@ -109,7 +111,6 @@
                 <p>
                   页数： <Tag size="medium">{{item.pages}} 页</Tag>
                 </p>
-
                 <Poptip trigger="hover"
                         title="所用到的技术"
                         word-wrap
@@ -117,9 +118,8 @@
                   <!-- <p class="truncate-text">效果：{{text.substring(0,25)}}……</p> -->
                   <p class="truncate-text">
                     效果：
-
-                    <Tag :color="color[Math.round(Math.random() * color.length-1)]"
-                         v-for="(item,i) in item.tagsArr"
+                    <!-- :color="color[Math.round(Math.random() * color.length-1)]" -->
+                    <Tag v-for="(item,i) in item.tagsArr"
                          :key="i"
                          v-if="i<=1"> {{item}}</Tag>
                     <!--
@@ -145,15 +145,29 @@
 
                   </div>
                 </Poptip>
-                <p><a href="#"
+                <p>
+                  <!-- <a href="#"
                      @click.stop="open(item.id)"
                      class="btn btn-primary"
-                     role="button">支付</a>
+                     role="button">支付</a> -->
+                  <Button @click.stop="open(item.id)"
+                          type="primary">支付</Button>
 
                   <!-- <a href="#"
                        class="btn btn-default"
                        role="button">收藏</a> -->
 
+                  <!-- <router-link exact
+                               tag="Button"
+                               target="_blank"
+                               style="margin-left:10px"
+                               to="{path:'/project/id/'+item.id}">查看详情
+                  </router-link> -->
+
+                  <Button :to="'/project/id/'+item.id"
+                          style="margin-left:10px"
+                          target="_blank">查看详情</Button>
+                  <!--
                   <router-link exact
                                tag="a"
                                class="btn btn-default"
@@ -161,7 +175,7 @@
                                target="_blank"
                                style="margin-left:10px"
                                :to="{path:'/project/id/'+item.id}">查看详情
-                  </router-link>
+                  </router-link> -->
                 </p>
               </div>
             </div>
@@ -191,22 +205,26 @@
           请凭此<strong class="strong">ID</strong>联系客服，付款后索取提取码。</p>
 
         <Row class="open">
-          <Col span="6"> <img style="width:100%;display:block"
-               src="../../assets/images/weixin.png"
-               alt="...">
+          <Col span="6">
+          <!-- src="https://www.huanggr.cn/works/img/gzh.jpg" -->
+          <img style="width:100%;display:block"
+               src="https://www.huanggr.cn/works/img/gzh.jpg"
+               alt="微信支付">
           <p>微信支付</p>
           </Col>
           <Col span="3"> &nbsp;</Col>
-          <Col span="6"> <img style="width:100%;display:block"
-               src="../../assets/images/weixin.png"
-               alt="...">
+          <Col span="6">
+          <img style="width:100%;display:block"
+               src="https://www.huanggr.cn/works/img/gzh.jpg"
+               alt="支付宝支付">
           <p>支付宝支付</p>
 
           </Col>
           <Col span="3"> &nbsp;</Col>
-          <Col span="6"> <img style="width:100%;display:block"
-               src="../../assets/images/weixin.png"
-               alt="...">
+          <Col span="6">
+          <img style="width:100%;display:block"
+               src="https://www.huanggr.cn/works/img/gzh.jpg"
+               alt="关注微信公众号">
           <p>关注微信公众号</p>
 
           </Col>
@@ -354,11 +372,11 @@ export default {
     },
     // 循环遍历给搜索条件增加-1
     serialize () {
-      this.searchList.forEach((item, index) => {
-        this.searchList[index].list.forEach((row, i) => {
-          this.searchList[index].list[i].index = -1
-        })
-      })
+      // this.searchList.forEach((item, index) => {
+      //   this.searchList[index].list.forEach((row, i) => {
+      //     this.searchList[index].list[i].index = -1
+      //   })
+      // })
     },
     getList (data) {
       this.apiList.getListApi(data).then(res => {

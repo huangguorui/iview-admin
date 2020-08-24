@@ -9,8 +9,8 @@
       <div class="container mt50px input_style ">
         <ol class="breadcrumb"
             style="margin-top:20px">
-          <li><a href="#">首页</a></li>
-          <li><a href="#">{{article.themeName}}</a></li>
+          <li><a href="/">首页</a></li>
+          <li><a href="javascript:;">{{article.themeName}}</a></li>
           <li class="active">{{article.title}}</li>
         </ol>
 
@@ -64,7 +64,8 @@
 
             <div v-for="(imgPath,i) in article.imgArr"
                  :key="'i'+i">
-              <img :src="getUrlIp+imgPath"
+              <!-- getUrlIp -->
+              <img :src="'http://i.huanggr.cn/static/'+imgPath"
                    :alt="article.title"
                    @error="nofindImg">
               <span class=""
@@ -76,7 +77,7 @@
                  v-show="false">
               <div class="col-md-4 col-lg-4">
                 <div class="thumbnail">
-                  <img src="../../assets/images/weixin.png"
+                  <img src="https://www.huanggr.cn/works/img/gzh.jpg"
                        alt="...">
 
                   <div class="caption">
@@ -86,7 +87,7 @@
               </div>
               <div class="col-md-4 col-lg-4">
                 <div class="thumbnail">
-                  <img src="../../assets/images/weixin.png"
+                  <img src="https://www.huanggr.cn/works/img/gzh.jpg"
                        alt="...">
 
                   <div class="caption">
@@ -96,7 +97,7 @@
               </div>
               <div class="col-md-4 col-lg-4">
                 <div class="thumbnail">
-                  <img src="../../assets/images/weixin.png"
+                  <img src="https://www.huanggr.cn/works/img/gzh.jpg"
                        alt="...">
 
                   <div class="caption">

@@ -32,6 +32,9 @@
                 支付方式：微信、淘宝店铺、支付宝转账、QQ红包、银行卡卡转账
 
               </p>
+              <p></p><strong>如有任何问题，请联系客服：<a target="_blank"
+                   href="http://wpa.qq.com/msgrd?v=3&amp;uin=1793712591&amp;site=qq&amp;menu=yes"
+                   class="strong">点击联系客服</a></strong>
 
             </div>
           </div>
